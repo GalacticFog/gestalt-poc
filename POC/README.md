@@ -3,6 +3,9 @@
 1. Modify generate-lambdas.sh with values for variables
 2. Modify ./delete-policies.sh and ./deploy-policies.sh with context paths
 
+2.1 Modify "config.yaml" with your ECS Provider information: ecs_cluster,ecs_access_key,ecs_secret_key
+
+
 ## Deploy Policies
 ```
 ./generate-lambdas.sh && ./delete-policies.sh && ./deploy-policies.sh

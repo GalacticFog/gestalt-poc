@@ -1,3 +1,10 @@
+. poc.env
+if [ $? -ne 0 ]; then
+  echo "Error, aborting"
+  exit 1
+fi
+
+
 cat > container-migrate-lambda.json <<EOF
 {
     "resource_type": "Gestalt::Resource::Node::Lambda",
@@ -5,12 +12,12 @@ cat > container-migrate-lambda.json <<EOF
     "description": "Container Migration Lambda",
     "properties": {
         "env": {
-            "IMAGE_PREFIX_KUBE": "docker.io",
-            "IMAGE_PREFIX_ECS": "my.private.registry",
+            "IMAGE_PREFIX_KUBE": "${registry_kube}",
+            "IMAGE_PREFIX_ECS": "${registry_ecs}",
             "ASSIGN_IMAGE_PREFIX": "true",
             "META_URL": "http://gestalt-meta.gestalt-system:10131",
-            "API_KEY": "15c0bcd4-641e-4807-97f0-16e8afa40858",
-            "API_SECRET": "m6g3BMz3jKrk7SMnp0rEPgKh2k04VNy9Ured/N3E"
+            "API_KEY": "${meta_api_key}",
+            "API_SECRET": "${meta_api_secret}"
         },
         "headers": {
             "Accept": "text/plain",
@@ -36,6 +43,8 @@ cat > container-migrate-lambda.json <<EOF
 }
 EOF
 
+echo "Built container-migrate-lambda.json"
+
 cat > container-promote-lambda.json <<EOF
 {
     "resource_type": "Gestalt::Resource::Node::Lambda",
@@ -44,8 +53,8 @@ cat > container-promote-lambda.json <<EOF
     "properties": {
         "env": {
             "META_URL": "http://gestalt-meta.gestalt-system:10131",
-            "API_KEY": "15c0bcd4-641e-4807-97f0-16e8afa40858",
-            "API_SECRET": "m6g3BMz3jKrk7SMnp0rEPgKh2k04VNy9Ured/N3E"
+            "API_KEY": "${meta_api_key}",
+            "API_SECRET": "${meta_api_secret}"
         },
         "headers": {
             "Accept": "text/plain",
@@ -70,3 +79,5 @@ cat > container-promote-lambda.json <<EOF
     }
 }
 EOF
+
+echo "Built container-promote-lambda.json" 

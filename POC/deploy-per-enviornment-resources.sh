@@ -9,20 +9,14 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-
-# Create lambdas
-fog context set $gestalt_environment_for_policy_lambdas
-[ $? -ne 0 ] && exit 1
-
-fog create resource -f container-migrate-lambda.json
-fog create resource -f container-promote-lambda.json
-
-
 # Create policies
 
-for e in dev test; do
+for e in $gestalt_environments_to_apply_policies; do
+    echo
+    echo "Creating policies for environment '$e'"
+    echo
 
-    fog context set /sandbox/dev-sandbox/$e
+    fog context set $e
     [ $? -ne 0 ] && exit 1
 
     fog create resource -f policy.json

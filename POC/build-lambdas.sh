@@ -81,3 +81,39 @@ cat > container-promote-lambda.json <<EOF
 EOF
 
 echo "Built container-promote-lambda.json" 
+
+
+cat > sms-lambda.json <<EOF
+{
+    "resource_type": "Gestalt::Resource::Node::Lambda",
+    "name": "sms-notification",
+    "description": "SMS Notification Lambda",
+    "properties": {
+        "env": {
+            "phone": "REPLACE WITH PHONE NUMBER"
+        },
+        "headers": {
+            "Accept": "text/plain",
+            "Content-Type": "text/html"
+        },
+        "code": "`cat src/sms-notification.js | base64`",
+        "code_type": "code",
+        "cpus": 0.1,
+        "memory": 128,
+        "timeout": 60,
+        "pre_warm": 0,
+        "handler": "run",
+        "public": true,
+        "runtime": "nashorn",
+        "provider": {
+            "id": "#{Provider /root/default-laser id}",
+            "locations": []
+        },
+        "periodic_info": {},
+        "secrets": [],
+        "apiendpoints": []
+    }
+}
+EOF
+
+echo "Built sms-lambda.json" 

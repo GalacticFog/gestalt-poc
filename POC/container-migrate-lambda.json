@@ -4,8 +4,8 @@
     "description": "Container Migration Lambda",
     "properties": {
         "env": {
-            "IMAGE_PREFIX_KUBE": "docker.io",
-            "IMAGE_PREFIX_ECS": "my.private.registry",
+            "IMAGE_PREFIX_KUBE": "docker.io/galacticfog",
+            "IMAGE_PREFIX_ECS": "my.private.repo",
             "ASSIGN_IMAGE_PREFIX": "true",
             "META_URL": "http://gestalt-meta.gestalt-system:10131",
             "API_KEY": "15c0bcd4-641e-4807-97f0-16e8afa40858",

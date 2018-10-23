@@ -1,0 +1,5 @@
+ecs_cluster: ecs-cluster-name
+ecs_region: us-east-1
+ecs_role: ecsTaskExecutionRole
+ecs_access_key: aws-access-key-value
+ecs_secret_key: aws-secret-key-value

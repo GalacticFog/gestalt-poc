@@ -1,0 +1,29 @@
+{
+    "name": "/update-kong",
+    "description": "Update Kong Endpoint",
+    "properties": {
+        "resource": "/update-kong",
+        "methods": [
+            "GET",
+            "PUT",
+            "POST",
+            "DELETE"
+        ],
+        "plugins": {
+            "rateLimit": {
+                "enabled": false,
+                "perMinute": 60
+            },
+            "gestaltSecurity": {
+                "enabled": false,
+                "users": [
+
+                ],
+                "groups": [
+
+                ]
+            }
+        },
+        "synchronous": true
+    }
+}

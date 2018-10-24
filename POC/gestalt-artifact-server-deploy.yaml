@@ -1,0 +1,42 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    gestalt-app: artifacts
+  name: gestalt-artifacts
+  namespace: gestalt-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      gestalt-app: artifacts
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        gestalt-app: artifacts
+    spec:
+      containers:
+      - image: docker.io/galacticfog/nginx-artifact-server:release-2.3.6
+        imagePullPolicy: Always
+        name: gestalt-artifacts
+        ports:
+        - containerPort: 80
+          name: service-api
+          protocol: TCP
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    gestalt-app: artifacts
+  name: gestalt-artifacts
+  namespace: gestalt-system
+spec:
+  ports:
+  - name: service-api
+    port: 80
+    protocol: TCP
+    targetPort: service-api

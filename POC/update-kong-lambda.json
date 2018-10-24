@@ -1,0 +1,29 @@
+{
+    "name": "update-kong",
+    "resource_type": "Gestalt::Resource::Node::Lambda",
+    "description": "Lambda for updating Kong endpoints",
+    "properties": {
+        "apiendpoints": [],
+        "provider": {
+            "id": "#{Provider /root/default-laser}",
+            "locations": []
+        },
+        "secrets": [],
+        "package_url": "http://gestalt-artifacts.gestalt-system.svc.cluster.local/configure-kong.jar",
+        "public": true,
+        "pre_warm": 0,
+        "compressed": false,
+        "cpus": 0.1,
+        "code_type": "package",
+        "headers": {
+            "Accept": "text/plain",
+            "Content-Type": "text/plain"
+        },
+        "periodic_info": {},
+        "timeout": 60,
+        "handler": "com.galacticfog.gestalt.kong.ConfigureForEcs;run",
+        "runtime": "java;scala",
+        "env": {},
+        "memory": 512
+    }
+}

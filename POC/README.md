@@ -16,6 +16,7 @@
 ./build-sample-resources.sh
 ```
 
+
 ## Deployment Order
 
 1. Login: `./cli_login.sh`
@@ -33,6 +34,10 @@
 ./deploy-per-enviornment-resources.sh
 ./deploy-kong-lambda.sh
 ./deploy-sms-lambda.sh
+
+# Edit yaml first, then 
+kubectl apply -f gestalt-artifact-server-deploy.yaml
+
 ```
 
 ## Debugging Migration Policy

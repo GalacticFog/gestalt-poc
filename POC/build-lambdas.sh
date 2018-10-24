@@ -90,7 +90,9 @@ cat > sms-lambda.json <<EOF
     "description": "SMS Notification Lambda",
     "properties": {
         "env": {
-            "phone": "REPLACE WITH PHONE NUMBER"
+            "phone": "REPLACE WITH PHONE NUMBER",
+            "user": "REPLACE",
+            "password": "REPLACE"
         },
         "headers": {
             "Accept": "text/plain",

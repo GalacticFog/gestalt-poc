@@ -1,6 +1,6 @@
 ## Demo Container migration
-fog context set /sandbox/dev-sandbox/dev
+fog context set /poc/sample/dev
 
-fog promote container nginx3  test2
+fog promote container nginx-test test
 
 fog show containers

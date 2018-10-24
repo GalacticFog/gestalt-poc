@@ -2,8 +2,8 @@
 # Fail on any error
 set -e
 
-DEBUG_FLAG="--debug"
-DEBUG_FLAG=
+# Debug
+# fog config set debug=true
 
 create() {
   local file=$1.json
@@ -23,8 +23,10 @@ exit_on_error() {
   fi
 }
 
+. poc.env
+
 #Create Providers under Sample Org
-fog context set --org 'poc-sample-org'
+fog context set --org $org
 exit_on_error "Failed to set context, aborting."
 
 create ecs-root-all
@@ -34,8 +36,9 @@ create ecs-root-only-test
 exit_on_error "Provider creation failed, aborting."
 
 # Set context and Create Provider at particular environment
-fog context set --org 'poc-sample-org' --workspace 'poc-sample-ws' --environment 'env-dev'
+fog context set --org $org --workspace $workspace --environment 'dev'
 exit_on_error "Failed to set context, aborting."
+
 create ecs-only-specific
 exit_on_error "Provider creation failed, aborting."
 

@@ -1,13 +1,19 @@
 #!/bin/bash
 set -e
 
+. poc.env
+if [ $? -ne 0 ]; then
+  echo "Error, aborting"
+  exit 1
+fi
+
 create_group () {
 
 GROUP_DEFINITION="group-dev.json"
 cat << GROUPDEF > ${GROUP_DEFINITION}
 {
     "description": "Sample User Group: Developers",
-    "name": "group-devs",
+    "name": "devs",
     "resource_type": "Gestalt::Resource::Group"
 }
 GROUPDEF
@@ -16,7 +22,7 @@ GROUP_DEFINITION="group-qa.json"
 cat << GROUPDEF > ${GROUP_DEFINITION}
 {
     "description": "Sample User Group: QA",
-    "name": "group-qa",
+    "name": "qa",
     "resource_type": "Gestalt::Resource::Group"
 }
 GROUPDEF
@@ -25,7 +31,7 @@ GROUP_DEFINITION="group-compliance.json"
 cat << GROUPDEF > ${GROUP_DEFINITION}
 {
     "description": "Sample User Group: Compliance",
-    "name": "group-compliance",
+    "name": "compliance",
     "resource_type": "Gestalt::Resource::Group"
 }
 GROUPDEF
@@ -42,7 +48,7 @@ cat << USERDEF > ${USER_DEFINITION}
     "properties": {
         "email": "user1-dev@poc-sample.gf",
         "firstName": "Developer 1",
-        "gestalt_home": "poc-sample-org",
+        "gestalt_home": "${org}",
         "lastName": "Sample",
         "password": "test123!"
     },
@@ -58,7 +64,7 @@ cat << USERDEF > ${USER_DEFINITION}
     "properties": {
         "email": "user-2-qa@poc-sample.gf",
         "firstName": "QA 1",
-        "gestalt_home": "poc-sample-org",
+        "gestalt_home": "${org}",
         "lastName": "Sample",
         "password": "test123!"
     },
@@ -75,7 +81,7 @@ cat << USERDEF > ${USER_DEFINITION}
     "properties": {
         "email": "user-3-compl@poc-sample.gf",
         "firstName": "Compliance 1",
-        "gestalt_home": "poc-sample-org",
+        "gestalt_home": "${org}",
         "lastName": "Sample",
         "password": "test123!"
     },
@@ -121,7 +127,10 @@ cat << PROVIDERDEFECS > ${PROVIDER_DEFINITION}
             ],
             "region": "#{Config ecs_region}",
             "secret_key": "#{Config ecs_secret_key}",
-            "taskRoleArn": "#{Config ecs_role}"
+            "taskRoleArn": "#{Config ecs_role}",
+            "kongConfigureUrl": "#{Config kongConfigureUrl}",
+            "kongManagementUrl": "#{Config kongManagementUrl}",
+            "sidecarContainerImageOverride": "#{Config sidecarContainerImageOverride}"
         },
         "environment_types": [],
         "linked_providers": [],

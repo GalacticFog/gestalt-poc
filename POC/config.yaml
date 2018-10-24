@@ -1,5 +1,8 @@
 ecs_cluster: ecs-cluster-name
 ecs_region: us-east-1
 ecs_role: ecsTaskExecutionRole
-ecs_access_key: aws-access-key-value
-ecs_secret_key: aws-secret-key-value
+ecs_access_key: 
+ecs_secret_key: 
+kongConfigureUrl: http://api1.cluster1.galacticfog.com
+kongManagementUrl: http://api1-mgmt.cluster1.galacticfog.com
+sidecarContainerImageOverride: docker.io/galacticfog/ecs-sidecar:release-2.3.6

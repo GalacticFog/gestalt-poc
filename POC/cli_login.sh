@@ -2,12 +2,11 @@
 
 set -e
 
-# cd ./POC && CURRENT_FOLDER=`pwd` && echo 'export PATH=$PATH:'"${CURRENT_FOLDER}/bin/mac"
-# cd ./POC && CURRENT_FOLDER=`pwd` && echo 'export PATH=$PATH:'"${CURRENT_FOLDER}/bin/linux"
-
-gestalt_ui_service_url="SET TO GESTALT URL"
-# gestalt_ui_service_url="http://localhost:31112"
-# gestalt_ui_service_url="http://gestalt.cluster1.galacticfog.com"
+. poc.env
+if [ $? -ne 0 ]; then
+  echo "Error, aborting"
+  exit 1
+fi
 
 gestalt_admin_username=`kubectl get secrets -n gestalt-system gestalt-secrets -ojsonpath='{.data.admin-username}' | base64 --decode`
 gestalt_admin_password=`kubectl get secrets -n gestalt-system gestalt-secrets -ojsonpath='{.data.admin-password}' | base64 --decode`

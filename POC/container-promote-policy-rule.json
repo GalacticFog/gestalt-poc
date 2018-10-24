@@ -5,7 +5,7 @@
         "match_actions": [
             "container.promote.pre"
         ],
-        "lambda": "#{Lambda /root/poc/global/container-promote}"
+        "lambda": "#{Lambda /root/global/global/container-promote}"
     },
     "resource_type": "Gestalt::Resource::Rule::Event"
 }

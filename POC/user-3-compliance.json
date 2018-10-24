@@ -4,7 +4,7 @@
     "properties": {
         "email": "user-3-compl@poc-sample.gf",
         "firstName": "Compliance 1",
-        "gestalt_home": "poc-sample-org",
+        "gestalt_home": "poc",
         "lastName": "Sample",
         "password": "test123!"
     },

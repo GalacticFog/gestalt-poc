@@ -2,8 +2,8 @@
 # Fail on any error
 set -e
 
-DEBUG_FLAG="--debug"
-DEBUG_FLAG=
+# Debug
+# fog config set debug=true
 
 exit_on_error() {
   if [ $? -ne 0 ]; then
@@ -13,23 +13,34 @@ exit_on_error() {
   fi
 }
 
+. poc.env
+
 # Set Parent Path
-fog context set --path /root ${DEBUG_FLAG}
+fog context set /root
 exit_on_error "Root Context Set failed, aborting."
+
+fog create workspace --org root --name global -d 'global' 
+fog create environment --org root --workspace global --name 'global' --description 'global' --type 'production'
+
 
 # Create Organizational Units
 # Organization
-fog create org --name 'poc-sample-org' --description 'POC Sample Organization' --org root ${DEBUG_FLAG}
+fog create org --name $org --description 'POC Sample Organization' --org root
 exit_on_error "Organization creation failed, aborting."
+
 # Workspace
-fog create workspace --org 'poc-sample-org' --name 'poc-sample-ws' -d 'POC Sample Workspace' ${DEBUG_FLAG}
+fog create workspace --org $org --name $workspace -d 'POC Sample Workspace' 
 exit_on_error "Workspace creation failed, aborting."
+
 # Environment(-s)
-fog create environment --org 'poc-sample-org' --workspace 'poc-sample-ws' --name 'env-dev' --description 'Development Environment' --type 'development' ${DEBUG_FLAG}
+fog create environment --org $org --workspace $workspace --name 'dev' --description 'Development Environment' --type 'development'
 exit_on_error "Environment creation failed, aborting."
-fog create environment --org 'poc-sample-org' --workspace 'poc-sample-ws' --name 'env-int' --description 'Integration Environment' --type 'test' ${DEBUG_FLAG}
+
+fog create environment --org $org --workspace $workspace --name 'test' --description 'Integration Environment' --type 'test'
 exit_on_error "Environment creation failed, aborting."
-fog create environment --org 'poc-sample-org' --workspace 'poc-sample-ws' --name 'env-perf' --description 'Performance Testing Environment' --type 'test' ${DEBUG_FLAG}
+
+fog create environment --org $org --workspace $workspace --name 'perf' --description 'Performance Testing Environment' --type 'test'
 exit_on_error "Environment creation failed, aborting."
-fog create environment --org 'poc-sample-org' --workspace 'poc-sample-ws' --name 'prod' --description 'Production Environment' --type 'production' ${DEBUG_FLAG}
+
+fog create environment --org $org --workspace $workspace --name 'prod' --description 'Production Environment' --type 'production'
 exit_on_error "Environment creation failed, aborting."

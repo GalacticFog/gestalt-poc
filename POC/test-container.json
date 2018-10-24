@@ -1,6 +1,6 @@
 {
     "resource_type": "Gestalt::Resource::Container",
-    "name": "nginx3",
+    "name": "nginx-test",
     "properties": {
         "provider": {
             "properties": {

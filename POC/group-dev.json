@@ -1,5 +1,5 @@
 {
     "description": "Sample User Group: Developers",
-    "name": "group-devs",
+    "name": "devs",
     "resource_type": "Gestalt::Resource::Group"
 }

@@ -1,5 +1,5 @@
 {
     "description": "Sample User Group: QA",
-    "name": "group-qa",
+    "name": "qa",
     "resource_type": "Gestalt::Resource::Group"
 }

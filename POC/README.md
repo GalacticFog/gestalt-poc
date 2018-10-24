@@ -1,10 +1,19 @@
 ## Setup
 
-1. Modify generate-lambdas.sh with values for variables
-2. Modify ./delete-policies.sh and ./deploy-policies.sh with context paths
+1. Modify "config.yaml" with your ECS Provider information: ecs_cluster,ecs_access_key,ecs_secret_key
+2. (Optional) Modify "deploy-structure.sh" parent context path.
+3. Modify generate-lambdas.sh with values for variables
+4. Modify ./delete-policies.sh and ./deploy-policies.sh with context paths
+5. Modify "cli_login.sh" with proper Gestalt Environment Entry Point: "gestalt_ui_service_url" and export appropriate Fog CLI binary in PATH
 
-2.1 Modify "config.yaml" with your ECS Provider information: ecs_cluster,ecs_access_key,ecs_secret_key
+## Deployment Order
 
+1. Login: ```./cli_login.sh```
+2. Create Structure:  ```./deploy-structure.sh```
+3. Create Users and Groups: ```./deploy-users-groups.sh```
+4. (Manual) Configure User Group Assignment and Entitlements (can also be done later)
+5. Create Providers: ```./deploy-providers.sh```
+6. <WHAT ERIC WANTS>
 
 ## Deploy Policies
 ```

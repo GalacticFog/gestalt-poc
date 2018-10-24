@@ -14,6 +14,7 @@
 ./build-policy-rules.sh
 ./build-kong-ecs-provider.sh
 ./build-sample-resources.sh
+./build-sample-ecs-provider.sh
 ```
 
 
@@ -38,6 +39,7 @@
 # Edit yaml first, then 
 kubectl apply -f gestalt-artifact-server-deploy.yaml
 
+#apply the sample ecs provider
 ```
 
 ## Debugging Migration Policy

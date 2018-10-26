@@ -1,6 +1,0 @@
-{
-    "resource_type": "Gestalt::Resource::Policy",
-    "name": "container-promote-policy",
-    "description": "Container Promote Policy",
-    "properties": {}
-}

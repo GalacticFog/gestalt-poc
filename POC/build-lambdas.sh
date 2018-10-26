@@ -120,6 +120,38 @@ EOF
 
 echo "Built sms-lambda.json" 
 
+cat > sms-endpoint.json <<EOF
+{
+    "name": "/smshello",
+    "description": "SMS Hello",
+    "properties": {
+        "resource": "/smshello",
+        "methods": [
+            "GET",
+            "PUT",
+            "POST",
+            "DELETE"
+        ],
+        "plugins": {
+            "rateLimit": {
+                "enabled": false,
+                "perMinute": 60
+            },
+            "gestaltSecurity": {
+                "enabled": false,
+                "users": [
+
+                ],
+                "groups": [
+
+                ]
+            }
+        },
+        "synchronous": true
+    }
+}
+EOF
+echo "Built sms-endpoint.json"
 
 cat > update-kong-lambda.json <<EOF
 {
@@ -154,3 +186,36 @@ cat > update-kong-lambda.json <<EOF
 EOF
 
 echo "Built update-kong-lambda.json" 
+
+
+cat > update-kong-api-endpoint.json <<EOF
+{
+    "name": "/update-kong",
+    "description": "Update Kong Endpoint",
+    "properties": {
+        "resource": "/update-kong",
+        "methods": [
+            "GET",
+            "PUT",
+            "POST",
+            "DELETE"
+        ],
+        "plugins": {
+            "rateLimit": {
+                "enabled": false,
+                "perMinute": 60
+            },
+            "gestaltSecurity": {
+                "enabled": false,
+                "users": [
+
+                ],
+                "groups": [
+
+                ]
+            }
+        },
+        "synchronous": true
+    }
+}
+EOF

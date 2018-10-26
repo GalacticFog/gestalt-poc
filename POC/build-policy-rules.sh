@@ -4,6 +4,14 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+cat > policy.json <<EOF
+{
+    "resource_type": "Gestalt::Resource::Policy",
+    "name": "default-policy",
+    "description": "Default Environment Policy",
+    "properties": {}
+}
+EOF
 
 cat > container-migrate-policy-rule.json <<EOF
 {

@@ -25,22 +25,26 @@ exit_on_error() {
 
 . poc.env
 
-#Create Providers under Sample Org
-fog context set --org $org
-exit_on_error "Failed to set context, aborting."
+fog context set /root
 
-create ecs-root-all
-exit_on_error "Provider creation failed, aborting."
+fog create resource -f default-ecs-provider.json --config config.yaml
 
-create ecs-root-only-test
-exit_on_error "Provider creation failed, aborting."
+# #Create Providers under Sample Org
+# fog context set --org $org
+# exit_on_error "Failed to set context, aborting."
 
-# Set context and Create Provider at particular environment
-fog context set --org $org --workspace $workspace --environment 'dev'
-exit_on_error "Failed to set context, aborting."
+# create ecs-root-all
+# exit_on_error "Provider creation failed, aborting."
 
-create ecs-only-specific
-exit_on_error "Provider creation failed, aborting."
+# create ecs-root-only-test
+# exit_on_error "Provider creation failed, aborting."
+
+# # Set context and Create Provider at particular environment
+# fog context set --org $org --workspace $workspace --environment 'dev'
+# exit_on_error "Failed to set context, aborting."
+
+# create ecs-only-specific
+# exit_on_error "Provider creation failed, aborting."
 
 # -root (OR OTHER)
 # -- o:poc-sample-org - POC Sample Organization <=== p: poc-sample-ecs-sample-all (NO CONSTRAINTS), p:poc-sample-ecs-sample-only-test (TEST)

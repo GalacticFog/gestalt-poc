@@ -7,10 +7,10 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-cat << EOF > sample-ecs-provider.json
+cat << EOF > default-ecs-provider.json
 {
     "description": "ECS Provider",
-    "name": "sample-ecs-provider",
+    "name": "defailt-ecs-provider",
     "properties": {
         "config": {
             "access_key": "#{Config ecs_access_key}",

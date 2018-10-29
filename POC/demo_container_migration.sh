@@ -4,8 +4,12 @@ fog context set /poc/sample/dev
 
 fog delete container nginx-test
 
-fog create resource -f test-container.json
+fog create resource -f test-container.json --name nginx-test
 
-fog migrate container nginx-test  /poc/poc-sample-ecs-sample-all
+fog show containers
+
+fog migrate container nginx-test /root/default-ecs-provider
+
+sleep 5
 
 fog show containers

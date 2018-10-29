@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 # Fail on any error
 set -e
 
@@ -15,32 +15,23 @@ exit_on_error() {
 
 . poc.env
 
-# Set Parent Path
-fog context set /root
-exit_on_error "Root Context Set failed, aborting."
+# # Global workspace
+# fog context set /root
+# fog create workspace --name global --description 'global' 
 
-fog create workspace --org root --name global -d 'global' 
-fog create environment --org root --workspace global --name 'global' --description 'global' --type 'production'
+# # Global environment
+# fog context set /root/global
+# fog create environment --name 'global' --description 'global' --type 'production'
 
-
-# Create Organizational Units
-# Organization
-fog create org --name $org --description 'POC Sample Organization' --org root
-exit_on_error "Organization creation failed, aborting."
+# Sample org
+fog create org $org --description 'POC Sample Organization' --org root
 
 # Workspace
-fog create workspace --org $org --name $workspace -d 'POC Sample Workspace' 
-exit_on_error "Workspace creation failed, aborting."
+fog create workspace $workspace --description 'POC Sample Workspace' --org $org
 
-# Environment(-s)
-fog create environment --org $org --workspace $workspace --name 'dev' --description 'Development Environment' --type 'development'
-exit_on_error "Environment creation failed, aborting."
-
-fog create environment --org $org --workspace $workspace --name 'test' --description 'Integration Environment' --type 'test'
-exit_on_error "Environment creation failed, aborting."
-
-fog create environment --org $org --workspace $workspace --name 'perf' --description 'Performance Testing Environment' --type 'test'
-exit_on_error "Environment creation failed, aborting."
-
-fog create environment --org $org --workspace $workspace --name 'prod' --description 'Production Environment' --type 'production'
-exit_on_error "Environment creation failed, aborting."
+# Environments
+fog context set /$org/$workspace
+fog create environment --name 'dev'  --description 'Development Environment' --type 'development'
+fog create environment --name 'test' --description 'Integration Environment' --type 'test'
+fog create environment --name 'perf' --description 'Performance Testing Environment' --type 'test'
+fog create environment --name 'prod' --description 'Production Environment' --type 'production'

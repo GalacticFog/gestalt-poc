@@ -1,1 +1,0 @@
-https://github.com/GalacticFog/gestalt-fog-cli/releases/tag/0.6.2

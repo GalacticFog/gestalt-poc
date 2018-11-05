@@ -1,4 +1,4 @@
-description: All org entitlement actions
+description: Admin org role
 scope: org
 actions:
 - actionprovider.create

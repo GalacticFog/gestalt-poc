@@ -2,9 +2,6 @@
 # Fail on any error
 set -e
 
-DEBUG_FLAG="--debug"
-DEBUG_FLAG=
-
 create() {
   local file=$1.json
   echo "Creating resource from '$file'..."
@@ -24,25 +21,21 @@ exit_on_error() {
 }
 
 # Set Parent Path
-fog context set --path /root ${DEBUG_FLAG}
-exit_on_error "Root Context Set failed, aborting."
+fog context set --path /root
 
 # Create User Groups
 create group-dev
-exit_on_error "User Group creation failed, aborting."
-
 create group-qa
-exit_on_error "User Group creation failed, aborting."
-
 create group-compliance
-exit_on_error "User Group creation failed, aborting."
 
 # Create Users
 create user-1-dev
-exit_on_error "User creation failed, aborting."
-
 create user-2-qa
-exit_on_error "User creation failed, aborting."
-
 create user-3-compliance
-exit_on_error "User creation failed, aborting."
+
+# User / Group assignments
+fog admin add-user-to-group --group devs --user user1
+
+fog admin add-user-to-group --group qa --user user2
+
+fog admin add-user-to-group --group compliance --user user3

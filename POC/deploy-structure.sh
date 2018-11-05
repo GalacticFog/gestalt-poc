@@ -15,13 +15,13 @@ exit_on_error() {
 
 . poc.env
 
-# # Global workspace
-# fog context set /root
-# fog create workspace --name global --description 'global' 
+# Global workspace
+fog context set /root
+fog create workspace --name global --description 'global' 
 
-# # Global environment
-# fog context set /root/global
-# fog create environment --name 'global' --description 'global' --type 'production'
+# Global environment
+fog context set /root/global
+fog create environment --name 'global' --description 'global' --type 'production'
 
 # Sample org
 fog create org $org --description 'POC Sample Organization' --org root

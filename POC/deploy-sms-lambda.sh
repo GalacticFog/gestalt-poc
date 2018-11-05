@@ -15,6 +15,6 @@ fog context set $gestalt_environment_for_policy_lambdas
 
 fog create resource -f sms-lambda.json
 
-fog create api 'demo' 'Demo API' --provider 'default-kong'
+fog create api 'demo' --description 'Demo API' --provider 'default-kong'
 
 fog create api-endpoint -f sms-endpoint.json --api 'demo' --lambda 'sms-notification'

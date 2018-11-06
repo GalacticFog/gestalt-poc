@@ -2,7 +2,7 @@
 
 set -e
 
-org='sandbox26'
+org='sandbox'
 workspace='dev-sandbox'
 environment='dev'
 kong='default-kong'
@@ -49,12 +49,12 @@ fog create resource -f nginx-container.json --provider $caas
 
 ## Kafka
 
-# fog ext create-sample-resources --dir ./examples --provider $caas --laser-provider $laser --stream-provider 'default-stream-provider'
-# fog create container -f kafka-container.json --provider 'default-dcos'
-# fog create lambda -f kafka-consumer-lambda.json --provider laser
-# fog create lambda -f kafka-producer-lambda.json --provider laser
-# fog create api-endpoint -f kafka-consumer-api-endpoint.json --api $api --lambda 'kafkaConsumer'
-# fog create api-endpoint -f kafka-producer-api-endpoint.json --api $api --lambda 'kafkaProducer'
+fog ext create-sample-resources --dir . --provider $caas --laser-provider $laser --stream-provider 'default-stream-provider'
+# fog create resource -f kafka-container.json --provider $caas
+# fog create resource -f kafka-consumer-lambda.json --provider $laser
+# fog create resource -f kafka-producer-lambda.json --provider $laser
+fog create api-endpoint -f kafka-consumer-api-endpoint.json --api $api --lambda 'kafkaConsumer'
+fog create api-endpoint -f kafka-producer-api-endpoint.json --api $api --lambda 'kafkaProducer'
 
 
 # # Create Lambdas

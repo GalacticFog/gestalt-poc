@@ -12,4 +12,4 @@ fog create resource -f generated/sms-lambda.json
 
 fog create api 'demo' --description 'Demo API' --provider 'default-kong'
 
-fog create api-endpoint -f generated/sms-endpoint.json --api 'demo' --lambda 'sms-notification'
+fog create api-endpoint -f endpoints/sms-endpoint.json --api 'demo' --lambda 'sms-notification'

@@ -11,8 +11,8 @@ run() {
 
 . poc.env
 
+# run deploy-users-groups.sh
 run deploy-hierarchy.sh
-run deploy-users-groups.sh
 run deploy-global-resources.sh
 run deploy-environment-policies.sh
 run deploy-sms-lambda.sh

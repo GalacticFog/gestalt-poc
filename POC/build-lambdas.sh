@@ -2,6 +2,7 @@ set -e
 
 . poc.env
 
+echo "Reading gestalt-security-creds secret from Kubernetes cluster..."
 meta_api_key=`kubectl get secrets -n gestalt-system gestalt-security-creds -ojsonpath='{.data.API_KEY}' | base64 --decode`
 meta_api_secret=`kubectl get secrets -n gestalt-system gestalt-security-creds -ojsonpath='{.data.API_SECRET}' | base64 --decode`
 
@@ -16,7 +17,6 @@ if [ -z "$meta_api_secret" ]; then
 fi
 
 mkdir -p generated
-
 
 cat > generated/container-migrate-lambda.json <<EOF
 {

@@ -4,17 +4,12 @@
 set -e
 
 . poc.env
-if [ $? -ne 0 ]; then
-  echo "Error, aborting"
-  exit 1
-fi
 
 # Create lambdas
 fog context set $gestalt_environment_for_policy_lambdas
-[ $? -ne 0 ] && exit 1
 
-fog create resource -f sms-lambda.json
+fog create resource -f generated/sms-lambda.json
 
 fog create api 'demo' --description 'Demo API' --provider 'default-kong'
 
-fog create api-endpoint -f sms-endpoint.json --api 'demo' --lambda 'sms-notification'
+fog create api-endpoint -f generated/sms-endpoint.json --api 'demo' --lambda 'sms-notification'

@@ -1,10 +1,8 @@
 . poc.env
-if [ $? -ne 0 ]; then
-  echo "Error, aborting"
-  exit 1
-fi
 
-cat > kong-ecs-provider.yaml <<EOF
+mkdir -p generated
+
+cat > generated/kong-ecs-provider.yaml <<EOF
 #
 # Configuration only Kong provider for an external Kong instance
 #

@@ -2,17 +2,6 @@
 # Fail on any error
 set -e
 
-# Debug
-# fog config set debug=true
-
-exit_on_error() {
-  if [ $? -ne 0 ]; then
-    echo
-    echo "[Error] $@"
-    exit 1
-  fi
-}
-
 . poc.env
 
 # Global workspace

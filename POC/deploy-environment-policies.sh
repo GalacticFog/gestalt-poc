@@ -19,8 +19,8 @@ for e in $gestalt_environments_to_apply_policies; do
     fog context set $e
     [ $? -ne 0 ] && exit 1
 
-    fog create resource -f policy.json
-    fog create policy-rule -f container-migrate-policy-rule.json --policy 'default-policy'
-    fog create policy-rule -f container-promote-policy-rule.json --policy 'default-policy'
+    fog create resource -f policies/policy.json
+    fog create policy-rule -f policies/container-migrate-policy-rule.json --policy 'default-policy'
+    fog create policy-rule -f policies/container-promote-policy-rule.json --policy 'default-policy'
 
 done

@@ -1,11 +1,24 @@
+set -e
+
 . poc.env
-if [ $? -ne 0 ]; then
-  echo "Error, aborting"
-  exit 1
+
+meta_api_key=`kubectl get secrets -n gestalt-system gestalt-security-creds -ojsonpath='{.data.API_KEY}' | base64 --decode`
+meta_api_secret=`kubectl get secrets -n gestalt-system gestalt-security-creds -ojsonpath='{.data.API_SECRET}' | base64 --decode`
+
+if [ -z "$meta_api_key" ]; then
+    echo "Missing meta_api_key, aborting"
+    exit 1
 fi
 
+if [ -z "$meta_api_secret" ]; then
+    echo "Missing meta_api_secret, aborting"
+    exit 1
+fi
 
-cat > container-migrate-lambda.json <<EOF
+mkdir -p generated
+
+
+cat > generated/container-migrate-lambda.json <<EOF
 {
     "resource_type": "Gestalt::Resource::Node::Lambda",
     "name": "container-migrate",
@@ -45,7 +58,7 @@ EOF
 
 echo "Built container-migrate-lambda.json"
 
-cat > container-promote-lambda.json <<EOF
+cat > generated/container-promote-lambda.json <<EOF
 {
     "resource_type": "Gestalt::Resource::Node::Lambda",
     "name": "container-promote",
@@ -83,7 +96,7 @@ EOF
 echo "Built container-promote-lambda.json" 
 
 
-cat > sms-lambda.json <<EOF
+cat > generated/sms-lambda.json <<EOF
 {
     "resource_type": "Gestalt::Resource::Node::Lambda",
     "name": "sms-notification",
@@ -120,7 +133,7 @@ EOF
 
 echo "Built sms-lambda.json" 
 
-cat > sms-endpoint.json <<EOF
+cat > generated/sms-endpoint.json <<EOF
 {
     "name": "/smshello",
     "description": "SMS Hello",
@@ -153,7 +166,7 @@ cat > sms-endpoint.json <<EOF
 EOF
 echo "Built sms-endpoint.json"
 
-cat > update-kong-lambda.json <<EOF
+cat > generated/update-kong-lambda.json <<EOF
 {
     "name": "update-kong",
     "resource_type": "Gestalt::Resource::Node::Lambda",
@@ -188,7 +201,7 @@ EOF
 echo "Built update-kong-lambda.json" 
 
 
-cat > update-kong-api-endpoint.json <<EOF
+cat > generated/update-kong-api-endpoint.json <<EOF
 {
     "name": "/update-kong",
     "description": "Update Kong Endpoint",

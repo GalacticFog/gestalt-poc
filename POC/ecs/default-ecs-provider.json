@@ -1,11 +1,3 @@
-#!/bin/bash
-set -e
-
-. poc.env
-
-mkdir -p generated
-
-cat > generated/default-ecs-provider.json << EOF
 {
     "description": "ECS Provider",
     "name": "defailt-ecs-provider",
@@ -40,4 +32,3 @@ cat > generated/default-ecs-provider.json << EOF
     },
     "resource_type": "Gestalt::Configuration::Provider::CaaS::ECS"
 }
-EOF

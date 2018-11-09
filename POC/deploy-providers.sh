@@ -27,7 +27,7 @@ exit_on_error() {
 
 fog context set /root
 
-fog create resource -f default-ecs-provider.json --config config.yaml
+fog create resource -f ecs/default-ecs-provider.json --config config.yaml
 
 # #Create Providers under Sample Org
 # fog context set --org $org

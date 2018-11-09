@@ -2,94 +2,6 @@
 set -e
 
 . poc.env
-if [ $? -ne 0 ]; then
-  echo "Error, aborting"
-  exit 1
-fi
-
-create_group () {
-
-GROUP_DEFINITION="group-dev.json"
-cat << GROUPDEF > ${GROUP_DEFINITION}
-{
-    "description": "Sample User Group: Developers",
-    "name": "devs",
-    "resource_type": "Gestalt::Resource::Group"
-}
-GROUPDEF
-
-GROUP_DEFINITION="group-qa.json"
-cat << GROUPDEF > ${GROUP_DEFINITION}
-{
-    "description": "Sample User Group: QA",
-    "name": "qa",
-    "resource_type": "Gestalt::Resource::Group"
-}
-GROUPDEF
-
-GROUP_DEFINITION="group-compliance.json"
-cat << GROUPDEF > ${GROUP_DEFINITION}
-{
-    "description": "Sample User Group: Compliance",
-    "name": "compliance",
-    "resource_type": "Gestalt::Resource::Group"
-}
-GROUPDEF
-
-}
-
-create_user () {
-
-USER_DEFINITION="user-1-dev.json"
-cat << USERDEF > ${USER_DEFINITION}
-{
-    "description": "Developer",
-    "name": "user1",
-    "properties": {
-        "email": "user1-dev@poc-sample.gf",
-        "firstName": "Developer 1",
-        "gestalt_home": "${org}",
-        "lastName": "Sample",
-        "password": "test123!"
-    },
-    "resource_type": "Gestalt::Resource::User"
-}
-USERDEF
-
-USER_DEFINITION="user-2-qa.json"
-cat << USERDEF > ${USER_DEFINITION}
-{
-    "description": "QA",
-    "name": "user2",
-    "properties": {
-        "email": "user-2-qa@poc-sample.gf",
-        "firstName": "QA 1",
-        "gestalt_home": "${org}",
-        "lastName": "Sample",
-        "password": "test123!"
-    },
-    "resource_type": "Gestalt::Resource::User"
-}
-USERDEF
-
-
-USER_DEFINITION="user-3-compliance.json"
-cat << USERDEF > ${USER_DEFINITION}
-{
-    "description": "Compliance",
-    "name": "user3",
-    "properties": {
-        "email": "user-3-compl@poc-sample.gf",
-        "firstName": "Compliance 1",
-        "gestalt_home": "${org}",
-        "lastName": "Sample",
-        "password": "test123!"
-    },
-    "resource_type": "Gestalt::Resource::User"
-}
-USERDEF
-}
-
 
 create_provider_ecs() {
 
@@ -235,7 +147,7 @@ PROVIDERDEFECS
 
 
 
-cat > test-container.json <<EOF
+cat > generated/test-container.json <<EOF
 {
     "resource_type": "Gestalt::Resource::Container",
     "name": "nginx-test",
@@ -278,6 +190,4 @@ EOF
 
 echo "Built test-container.json"
 
-create_group
-create_user
 # create_provider_ecs

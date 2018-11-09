@@ -1,10 +1,8 @@
 . poc.env
-if [ $? -ne 0 ]; then
-  echo "Error, aborting"
-  exit 1
-fi
 
-cat > policy.json <<EOF
+mkdir -p generated
+
+cat > generated/policy.json <<EOF
 {
     "resource_type": "Gestalt::Resource::Policy",
     "name": "default-policy",
@@ -13,7 +11,7 @@ cat > policy.json <<EOF
 }
 EOF
 
-cat > container-migrate-policy-rule.json <<EOF
+cat > generated/container-migrate-policy-rule.json <<EOF
 {
     "name": "invoke-container-migrate",
     "description": "Invoke Container Migrate",
@@ -27,7 +25,7 @@ cat > container-migrate-policy-rule.json <<EOF
 }
 EOF
 
-cat > container-promote-policy-rule.json <<EOF
+cat > generated/container-promote-policy-rule.json <<EOF
 {
     "name": "invoke-container-promote",
     "description": "Invoke Container Promote",

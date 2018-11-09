@@ -9,10 +9,15 @@ run() {
     echo
 }
 
-run deploy-structure.sh
+. poc.env
+
+run deploy-hierarchy.sh
 run deploy-users-groups.sh
 run deploy-global-resources.sh
-run deploy-per-enviornment-resources.sh
-run deploy-kong-lambda.sh
+run deploy-environment-policies.sh
 run deploy-sms-lambda.sh
-run deploy-providers.sh
+
+if [ ! -z "$enable_ecs" ]; then 
+    run deploy-kong-lambda.sh
+    run deploy-providers.sh
+fi

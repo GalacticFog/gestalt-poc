@@ -1,5 +1,0 @@
-{
-    "description": "Sample User Group: Compliance",
-    "name": "compliance",
-    "resource_type": "Gestalt::Resource::Group"
-}

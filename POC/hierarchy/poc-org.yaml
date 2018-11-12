@@ -1,0 +1,6 @@
+resource_type: 'Gestalt::Resource::Organization'
+name: poc
+description: POC Sample Organization
+properties:
+  fqon: poc
+context: /root

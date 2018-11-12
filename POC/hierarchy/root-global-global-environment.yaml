@@ -1,0 +1,6 @@
+resource_type: 'Gestalt::Resource::Environment'
+name: global
+description: Global
+context: /root/global
+properties:
+  environment_type: production

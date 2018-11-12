@@ -9,9 +9,9 @@ groups:
 - name: dev
   description: Developers group
   members:
-  - user1
-  - user3
-  - user2
 - name: dev2
   description: Developers group 2
   members:
+  - user1
+  - user3
+  - user2

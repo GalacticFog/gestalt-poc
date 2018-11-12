@@ -1,7 +1,7 @@
 {
   "resource_type": "Gestalt::Resource::Node::Lambda",
   "name": "dotnet-hello",
-  "description": "https://github.com/GalacticFog/lambda-examples/tree/master/dotnet_lambda/examples/hello-world",
+  "description": "https://github.com/GalacticFog/lambda-examples/tree/master/dotnet_lambda/examples/hello-world UPDATE",
   "properties": {
     "package_url": "https://s3.amazonaws.com/gfi.lambdas/hello_world_dotnet.zip",
     "public": true,
@@ -20,6 +20,6 @@
       "id": "#{Provider /root/default-laser}",
       "locations": []
     },
-    "memory": 512
+    "memory": 1024
   }
 }

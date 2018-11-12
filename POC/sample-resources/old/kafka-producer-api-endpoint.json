@@ -1,9 +1,9 @@
 {
     "resource_type": "Gestalt::Resource::ApiEndpoint",
-    "name": "/kafka-consumer",
-    "description": "Kafka Consumer Lambda Endpoint",
+    "name": "/kafka-producer",
+    "description": "Kafka Producer Endpoint",
     "properties": {
-        "resource": "/kafka-consumer",
+        "resource": "/kafka-producer",
         "methods": [
             "GET",
             "PUT",
@@ -25,6 +25,13 @@
                 ]
             }
         },
-        "synchronous": true
+        "synchronous": true,
+        "implementation_type": "lambda",
+        "implementation_id": "#{Lambda kafkaProducer}"
+    },
+    "context": {
+        "api": {
+            "id": "#{Api dev-sandbox}"
+        }
     }
 }

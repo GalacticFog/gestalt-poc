@@ -1,14 +1,11 @@
 {
     "resource_type": "Gestalt::Resource::ApiEndpoint",
-    "name": "/hello-dotnet",
-    "description": "Hello .NET Endpoint",
+    "name": "/sales",
+    "description": "Sales Example Endpoint",
     "properties": {
-        "resource": "/hello-dotnet",
+        "resource": "/sales",
         "methods": [
-            "GET",
-            "PUT",
-            "POST",
-            "DELETE"
+            "GET"
         ],
         "plugins": {
             "rateLimit": {
@@ -25,6 +22,13 @@
                 ]
             }
         },
-        "synchronous": true
+        "synchronous": true,
+        "implementation_type": "lambda",
+        "implementation_id": "#{Lambda sales}"
+    },
+    "context": {
+        "api": {
+            "id": "#{Api dev-sandbox}"
+        }
     }
 }

@@ -1,9 +1,9 @@
 {
     "resource_type": "Gestalt::Resource::ApiEndpoint",
-    "name": "/slack-sales",
-    "description": "Slack Sales Example Endpoint",
+    "name": "/kafka-consumer",
+    "description": "Kafka Consumer Lambda Endpoint",
     "properties": {
-        "resource": "/slack-sales",
+        "resource": "/kafka-consumer",
         "methods": [
             "GET",
             "PUT",
@@ -25,6 +25,13 @@
                 ]
             }
         },
-        "synchronous": true
+        "synchronous": true,
+        "implementation_type": "lambda",
+        "implementation_id": "#{Lambda kafkaConsumer}"
+    },
+    "context": {
+        "api": {
+            "id": "#{Api dev-sandbox}"
+        }
     }
 }

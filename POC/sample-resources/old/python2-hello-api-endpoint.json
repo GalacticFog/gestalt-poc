@@ -1,9 +1,9 @@
 {
     "resource_type": "Gestalt::Resource::ApiEndpoint",
-    "name": "/kafka-producer",
-    "description": "Kafka Producer Endpoint",
+    "name": "/hello-python2",
+    "description": "Python v2 Hello Endpoint",
     "properties": {
-        "resource": "/kafka-producer",
+        "resource": "/hello-python2",
         "methods": [
             "GET",
             "PUT",
@@ -25,6 +25,13 @@
                 ]
             }
         },
-        "synchronous": true
+        "synchronous": true,
+        "implementation_type": "lambda",
+        "implementation_id": "#{Lambda python2-hello}"
+    },
+    "context": {
+        "api": {
+            "id": "#{Api dev-sandbox}"
+        }
     }
 }

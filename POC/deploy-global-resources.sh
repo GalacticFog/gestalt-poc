@@ -13,5 +13,5 @@ fi
 fog context set $gestalt_environment_for_policy_lambdas
 [ $? -ne 0 ] && exit 1
 
-fog create resource -f generated/container-migrate-lambda.json
-fog create resource -f generated/container-promote-lambda.json
+fog apply -f generated/container-migrate-lambda.json
+fog apply -f generated/container-promote-lambda.json

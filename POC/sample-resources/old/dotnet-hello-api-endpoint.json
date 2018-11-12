@@ -1,14 +1,13 @@
 {
     "resource_type": "Gestalt::Resource::ApiEndpoint",
-    "name": "/nginx-example",
-    "description": "Nginx Example Endpoint",
+    "name": "/hello-dotnet",
+    "description": "Hello .NET Endpoint",
     "properties": {
-        "resource": "/nginx-example",
+        "resource": "/hello-dotnet",
         "methods": [
             "GET",
-            "POST",
             "PUT",
-            "PATCH",
+            "POST",
             "DELETE"
         ],
         "plugins": {
@@ -18,13 +17,21 @@
             },
             "gestaltSecurity": {
                 "enabled": false,
-                "users": [],
-                "groups": []
+                "users": [
+
+                ],
+                "groups": [
+
+                ]
             }
         },
         "synchronous": true,
-        "implementation_id": "## This gets replaced ##",
-        "implementation_type": "## This gets replaced ##",
-        "container_port_name": "web"
+        "implementation_type": "lambda",
+        "implementation_id": "#{Lambda dotnet-hello}"
+    },
+    "context": {
+        "api": {
+            "id": "#{Api dev-sandbox}"
+        }
     }
 }

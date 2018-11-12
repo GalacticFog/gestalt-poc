@@ -8,7 +8,7 @@ set -e
 create() {
   local file=$1.json
   echo "Creating resource from '$file'..."
-  fog create resource -f $file --config config.yaml
+  fog apply -f $file --config config.yaml
   if [ $? -ne 0 ]; then
     echo "Error: Error processing '$file', aborting."
     exit 1
@@ -27,7 +27,7 @@ exit_on_error() {
 
 fog context set /root
 
-fog create resource -f ecs/default-ecs-provider.json --config config.yaml
+fog apply -f ecs/default-ecs-provider.json --config config.yaml
 
 # #Create Providers under Sample Org
 # fog context set --org $org

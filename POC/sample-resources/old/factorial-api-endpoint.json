@@ -25,6 +25,13 @@
                 ]
             }
         },
-        "synchronous": true
+        "synchronous": true,
+        "implementation_type": "lambda",
+        "implementation_id": "#{Lambda factorial}"
+    },
+    "context": {
+        "api": {
+            "id": "#{Api dev-sandbox}"
+        }
     }
 }

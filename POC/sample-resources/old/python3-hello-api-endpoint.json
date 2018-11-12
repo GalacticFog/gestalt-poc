@@ -1,9 +1,9 @@
 {
     "resource_type": "Gestalt::Resource::ApiEndpoint",
-    "name": "/hello-python2",
-    "description": "Python v2 Hello Endpoint",
+    "name": "/hello-python3",
+    "description": "Python v3 Hello Endpoint",
     "properties": {
-        "resource": "/hello-python2",
+        "resource": "/hello-python3",
         "methods": [
             "GET",
             "PUT",
@@ -25,6 +25,13 @@
                 ]
             }
         },
-        "synchronous": true
+        "synchronous": true,
+        "implementation_type": "lambda",
+        "implementation_id": "#{Lambda python3-hello}"
+    },
+    "context": {
+        "api": {
+            "id": "#{Api dev-sandbox}"
+        }
     }
 }

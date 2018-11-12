@@ -4,7 +4,7 @@ fog context set /poc/sample/dev
 
 fog delete container nginx-test
 
-fog create resource -f containers/test-container.json --name nginx-test
+fog apply -f containers/test-container.json --name nginx-test
 
 fog show containers
 

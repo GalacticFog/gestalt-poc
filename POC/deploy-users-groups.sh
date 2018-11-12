@@ -6,14 +6,14 @@ set -e
 fog context set --path /root
 
 # Create User Groups
-fog create resource -f groups/dev.yaml
-fog create resource -f groups/qa.yaml
-fog create resource -f groups/compliance.yaml
+fog apply -f groups/dev.yaml
+fog apply -f groups/qa.yaml
+fog apply -f groups/compliance.yaml
 
 # Create Users
-fog create resource -f users/user1.yaml
-fog create resource -f users/user2.yaml
-fog create resource -f users/user3.yaml
+fog apply -f users/user1.yaml
+fog apply -f users/user2.yaml
+fog apply -f users/user3.yaml
 
 # User / Group assignments
 fog admin add-user-to-group --group devs --user user1

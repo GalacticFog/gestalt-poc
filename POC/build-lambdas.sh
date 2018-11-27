@@ -132,3 +132,110 @@ cat > generated/sms-lambda.json <<EOF
 EOF
 
 echo "Built sms-lambda.json" 
+
+
+
+cat > generated/python-hello-default-lambda.json <<EOF
+{
+    "resource_type": "Gestalt::Resource::Node::Lambda",
+    "description": "Python3 Hello Lambda",
+    "name": "hello-python-default",
+    "properties": {
+        "apiendpoints": [],
+        "code_type": "package",
+        "compressed": false,
+        "cpus": 0.1,
+        "env": {},
+        "handler": "hello",
+        "headers": {
+            "Accept": "text/plain",
+            "Content-Type": "text/plain"
+        },
+        "memory": 128,
+        "package_url": "https://raw.githubusercontent.com/GalacticFog/lambda-examples/master/python_lambda/hello3.py",
+        "periodic_info": {},
+        "pre_warm": 0,
+        "provider": {
+            "id": "#{Provider /root/default-laser id}",
+            "locations": []
+        },
+        "public": true,
+        "runtime": "python",
+        "secrets": [],
+        "timeout": 60
+    }
+}
+EOF
+
+echo "Built python-hello-default-lambda.json" 
+
+
+cat > generated/python-hello-3-6-1-lambda.json <<EOF
+{
+    "resource_type": "Gestalt::Resource::Node::Lambda",
+    "description": "Python3 Hello Lambda",
+    "name": "hello-python-3-6-1",
+    "properties": {
+        "apiendpoints": [],
+        "code_type": "package",
+        "compressed": false,
+        "cpus": 0.1,
+        "env": {},
+        "handler": "hello",
+        "headers": {
+            "Accept": "text/plain",
+            "Content-Type": "text/plain"
+        },
+        "memory": 128,
+        "package_url": "https://raw.githubusercontent.com/GalacticFog/lambda-examples/master/python_lambda/hello3.py",
+        "periodic_info": {},
+        "pre_warm": 0,
+        "provider": {
+            "id": "#{Provider /root/default-laser id}",
+            "locations": []
+        },
+        "public": true,
+        "runtime": "python-3.6.1",
+        "secrets": [],
+        "timeout": 60
+    }
+}
+EOF
+
+echo "Built python-hello-3-6-1-lambda.json" 
+
+
+
+cat > generated/python-hello-3-6-3-lambda.json <<EOF
+{
+    "resource_type": "Gestalt::Resource::Node::Lambda",
+    "description": "Python3 Hello Lambda",
+    "name": "hello-python-3-6-3",
+    "properties": {
+        "apiendpoints": [],
+        "code_type": "package",
+        "compressed": false,
+        "cpus": 0.1,
+        "env": {},
+        "handler": "hello",
+        "headers": {
+            "Accept": "text/plain",
+            "Content-Type": "text/plain"
+        },
+        "memory": 128,
+        "package_url": "https://raw.githubusercontent.com/GalacticFog/lambda-examples/master/python_lambda/hello3.py",
+        "periodic_info": {},
+        "pre_warm": 0,
+        "provider": {
+            "id": "#{Provider /root/default-laser id}",
+            "locations": []
+        },
+        "public": true,
+        "runtime": "python-3.6.3",
+        "secrets": [],
+        "timeout": 60
+    }
+}
+EOF
+
+echo "Built python-hello-3-6-3-lambda.json" 

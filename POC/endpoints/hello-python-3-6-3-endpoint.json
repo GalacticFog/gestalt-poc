@@ -1,0 +1,29 @@
+{
+    "name": "/hello-python-3-6-3",
+    "description": "Hello Python3 Default",
+    "properties": {
+        "resource": "/hello-python-3-6-3",
+        "methods": [
+            "GET",
+            "PUT",
+            "POST",
+            "DELETE"
+        ],
+        "plugins": {
+            "rateLimit": {
+                "enabled": false,
+                "perMinute": 60
+            },
+            "gestaltSecurity": {
+                "enabled": false,
+                "users": [
+
+                ],
+                "groups": [
+
+                ]
+            }
+        },
+        "synchronous": true
+    }
+}

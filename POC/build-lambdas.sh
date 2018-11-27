@@ -195,7 +195,7 @@ cat > generated/python-hello-3-6-1-lambda.json <<EOF
             "locations": []
         },
         "public": true,
-        "runtime": "python-3.6.1",
+        "runtime": "python361",
         "secrets": [],
         "timeout": 60
     }
@@ -231,7 +231,7 @@ cat > generated/python-hello-3-6-3-lambda.json <<EOF
             "locations": []
         },
         "public": true,
-        "runtime": "python-3.6.3",
+        "runtime": "python363",
         "secrets": [],
         "timeout": 60
     }

@@ -1,8 +1,8 @@
 run() {
-    echo "Running '$1...'"
-    ./$1
+    echo "Running '$@...'"
+    $@
     if [ $? -ne 0 ]; then
-        echo "$1 encountered an error, aborting."
+        echo "$@ encountered an error, aborting."
         exit 1
     fi
     echo done.
@@ -11,13 +11,23 @@ run() {
 
 . poc.env
 
-# run deploy-users-groups.sh
-run deploy-hierarchy.sh
-run deploy-global-resources.sh
-run deploy-environment-policies.sh
-run deploy-sms-lambda.sh
+run fog context set /root
 
-if [ ! -z "$enable_ecs" ]; then 
-    run deploy-kong-lambda.sh
-    run deploy-providers.sh
-fi
+run fog apply -d users
+
+run fog apply -d groups
+
+run fog apply -d hierarchy
+
+# Apply global resources
+run fog apply -d global --context $gestalt_environment_for_policy_lambdas
+
+# Deploy environment policies
+for e in $gestalt_environments_to_apply_policies; do
+    run fog apply -d policies --context $e
+done
+
+# Deploy sample resources
+for e in $gestalt_environments_to_apply_policies; do
+    run fog apply -d sample-resources --context $e
+done

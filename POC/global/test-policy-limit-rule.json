@@ -1,0 +1,21 @@
+{
+    "name": "test-1",
+    "resource_type": "Gestalt::Resource::Rule::Limit",
+    "description": "",
+    "properties": {
+        "strict": false,
+        "match_actions": [
+            "container.create"
+        ],
+        "eval_logic": {
+            "property": "container.name",
+            "operator": "equals",
+            "value": "nginx"
+        }
+    },
+    "context": {
+        "policy": {
+            "id": "#{Policy default-policy}"
+        }
+    }
+}

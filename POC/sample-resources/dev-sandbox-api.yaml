@@ -1,0 +1,9 @@
+resource_type: 'Gestalt::Resource::Api'
+name: dev-sandbox
+description: Developer Sandbox API 2
+properties:
+  provider:
+    id: '#{Provider /root/default-gwm}'
+    locations: [
+      #{Provider /root/default-kong}
+    ]

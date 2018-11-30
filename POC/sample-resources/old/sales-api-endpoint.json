@@ -1,0 +1,34 @@
+{
+    "resource_type": "Gestalt::Resource::ApiEndpoint",
+    "name": "/sales",
+    "description": "Sales Example Endpoint",
+    "properties": {
+        "resource": "/sales",
+        "methods": [
+            "GET"
+        ],
+        "plugins": {
+            "rateLimit": {
+                "enabled": false,
+                "perMinute": 60
+            },
+            "gestaltSecurity": {
+                "enabled": false,
+                "users": [
+
+                ],
+                "groups": [
+
+                ]
+            }
+        },
+        "synchronous": true,
+        "implementation_type": "lambda",
+        "implementation_id": "#{Lambda sales}"
+    },
+    "context": {
+        "api": {
+            "id": "#{Api dev-sandbox}"
+        }
+    }
+}

@@ -1,0 +1,6 @@
+resource_type: 'Gestalt::Resource::Organization'
+name: sandbox105
+description: Sandbox 105 Hello
+properties:
+  fqon: sandbox105
+context: /root

@@ -1,0 +1,4 @@
+resource_type: 'Gestalt::Resource::Workspace'
+name: sample
+description: POC Sample Workspace
+context: /poc

@@ -8,11 +8,11 @@ properties:
   config:
     env:
       public:
-        PUBLIC_URL_HOST: "api3.cluster1.galacticfog.com"
+        PUBLIC_URL_HOST: "#{Config kong_host}"
         # PUBLIC_URL_PORT: 8000
         PUBLIC_URL_PROTOCOL: http
-        PUBLIC_URL_VHOST_0: "api3.cluster1.galacticfog.com"
-        SERVICE_HOST: "api3-mgmt.cluster1.galacticfog.com"
+        PUBLIC_URL_VHOST_0: "#{Config kong_host}"
+        SERVICE_HOST: "#{Config kong_mgmt_host}"
         # SERVICE_PORT: 8001
         SERVICE_PROTOCOL: http
 

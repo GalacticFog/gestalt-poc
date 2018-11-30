@@ -1,0 +1,26 @@
+resource_type: Gestalt::Resource::ApiEndpoint
+name: /nginx-example
+description: Nginx Example Endpoint
+properties:
+  resource: /nginx-example
+  methods:
+  - GET
+  - POST
+  - PUT
+  - PATCH
+  - DELETE
+  plugins:
+    rateLimit:
+      enabled: false
+      perMinute: 60
+    gestaltSecurity:
+      enabled: false
+      users: []
+      groups: []
+  synchronous: true
+  container_port_name: web
+  implementation_type: container
+  implementation_id: '#{Container nginx-example}'
+context:
+  api:
+    id: '#{Api dev-sandbox}'

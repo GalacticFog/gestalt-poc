@@ -1,0 +1,37 @@
+{
+    "resource_type": "Gestalt::Resource::ApiEndpoint",
+    "name": "/hello-dotnet",
+    "description": "Hello .NET Endpoint",
+    "properties": {
+        "resource": "/hello-dotnet",
+        "methods": [
+            "GET",
+            "PUT",
+            "POST",
+            "DELETE"
+        ],
+        "plugins": {
+            "rateLimit": {
+                "enabled": false,
+                "perMinute": 60
+            },
+            "gestaltSecurity": {
+                "enabled": false,
+                "users": [
+
+                ],
+                "groups": [
+
+                ]
+            }
+        },
+        "synchronous": true,
+        "implementation_type": "lambda",
+        "implementation_id": "#{Lambda dotnet-hello}"
+    },
+    "context": {
+        "api": {
+            "id": "#{Api dev-sandbox}"
+        }
+    }
+}

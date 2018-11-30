@@ -1,0 +1,17 @@
+resource_type: Fog::GroupMembership
+groups:
+- name: dev
+  description: Developers group
+  members:
+  - user1
+- name: qa
+  description: QA group
+  members:
+  - user2
+- name: compliance
+  description: Compliance group
+  members:
+  - user3
+# - name: dev2
+#   description: Developers group 2
+#   members:

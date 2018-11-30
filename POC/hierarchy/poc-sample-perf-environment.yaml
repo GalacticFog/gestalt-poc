@@ -1,0 +1,6 @@
+resource_type: 'Gestalt::Resource::Environment'
+name: perf
+description: Performance Testing
+context: /poc/sample
+properties:
+  environment_type: test

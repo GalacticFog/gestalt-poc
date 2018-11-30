@@ -1,0 +1,32 @@
+{
+    "resource_type": "Gestalt::Resource::Node::Lambda",
+    "name": "sms-notification",
+    "description": "SMS Notification Lambda",
+    "properties": {
+        "env": {
+            "phone": "REPLACE WITH PHONE NUMBER",
+            "user": "REPLACE",
+            "password": "REPLACE"
+        },
+        "headers": {
+            "Accept": "text/plain",
+            "Content-Type": "text/html"
+        },
+        "code": "#{LambdaSource src/sms-notification.js}",
+        "code_type": "code",
+        "cpus": 0.1,
+        "memory": 128,
+        "timeout": 60,
+        "pre_warm": 0,
+        "handler": "run",
+        "public": true,
+        "runtime": "nashorn",
+        "provider": {
+            "id": "#{Provider /root/default-laser id}",
+            "locations": []
+        },
+        "periodic_info": {},
+        "secrets": [],
+        "apiendpoints": []
+    }
+}

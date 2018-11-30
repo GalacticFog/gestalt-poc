@@ -1,0 +1,32 @@
+{
+    "resource_type": "Gestalt::Resource::Node::Lambda",
+    "name": "container-promote",
+    "description": "Container Migration Lambda",
+    "properties": {
+        "env": {
+            "META_URL": "http://gestalt-meta.gestalt-system:10131",
+            "API_KEY": "#{Config meta_api_key}",
+            "API_SECRET": "#{Config meta_api_secret}"
+        },
+        "headers": {
+            "Accept": "text/plain",
+            "Content-Type": "text/plain"
+        },
+        "code": "#{LambdaSource src/container-promote.js}",
+        "code_type": "code",
+        "cpus": 0.1,
+        "memory": 128,
+        "timeout": 60,
+        "pre_warm": 0,
+        "handler": "promote",
+        "public": true,
+        "runtime": "nashorn",
+        "provider": {
+            "id": "#{Provider /root/default-laser id}",
+            "locations": []
+        },
+        "periodic_info": {},
+        "secrets": [],
+        "apiendpoints": []
+    }
+}

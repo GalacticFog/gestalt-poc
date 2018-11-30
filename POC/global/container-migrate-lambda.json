@@ -1,0 +1,35 @@
+{
+    "resource_type": "Gestalt::Resource::Node::Lambda",
+    "name": "container-migrate",
+    "description": "Container Migration Lambda",
+    "properties": {
+        "env": {
+            "IMAGE_PREFIX_KUBE": "#{Config registry_kube}",
+            "IMAGE_PREFIX_ECS": "#{Config registry_ecs}",
+            "ASSIGN_IMAGE_PREFIX": "true",
+            "META_URL": "http://gestalt-meta.gestalt-system:10131",
+            "API_KEY": "#{Config meta_api_key}",
+            "API_SECRET": "#{Config meta_api_secret}"
+        },
+        "headers": {
+            "Accept": "text/plain",
+            "Content-Type": "text/plain"
+        },
+        "code": "#{LambdaSource src/container-migrate.js}",
+        "code_type": "code",
+        "cpus": 0.1,
+        "memory": 128,
+        "timeout": 60,
+        "pre_warm": 0,
+        "handler": "migrate",
+        "public": true,
+        "runtime": "nashorn",
+        "provider": {
+            "id": "#{Provider /root/default-laser id}",
+            "locations": []
+        },
+        "periodic_info": {},
+        "secrets": [],
+        "apiendpoints": []
+    }
+}

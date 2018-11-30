@@ -7,5 +7,10 @@
         ],
         "lambda": "#{Lambda /root/global/global/container-migrate}"
     },
-    "resource_type": "Gestalt::Resource::Rule::Event"
+    "resource_type": "Gestalt::Resource::Rule::Event",
+    "context": {
+        "policy": {
+            "id": "#{Policy default-policy}"
+        }
+    }
 }

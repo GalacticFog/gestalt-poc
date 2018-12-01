@@ -1,0 +1,25 @@
+resource_type: Gestalt::Resource::Node::Lambda
+name: controller
+description: 'Demo of lambda chaining'
+properties:
+  apiendpoints: []
+  provider:
+    id: '#{Provider /root/default-laser}'
+    locations: []
+  secrets: []
+  public: true
+  pre_warm: 0
+  code: '#{LambdaSource src/controller.js}'
+  cpus: 0.1
+  code_type: code
+  headers:
+    Accept: text/plain
+    Content-Type: text/plain
+  periodic_info: {}
+  timeout: 60
+  handler: handler
+  runtime: nodejs
+  env:
+    LAMBDA_1: '#{Lambda child-lambda-1}'
+    LAMBDA_2: '#{Lambda child-lambda-2}'
+  memory: 128

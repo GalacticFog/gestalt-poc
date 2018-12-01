@@ -35,12 +35,18 @@ module.exports.handler = async (event, context, callback) => {
         resolveWithFullResponse: true,
         headers: context.headers || {},
         body: ''
-    }    
+    }
+
+    let step = 0;
 
     console.log(`Will process ${urls.length} urls...`);
     for (let url of urls) {
 
         const start = Date.now();
+
+        // Set and increment step
+        step++;
+        options.headers = Object.assign(options.headers, { 'step': String(step) }); // Must be string
 
         console.log(`Invoking ${url}...`)
 
@@ -49,15 +55,17 @@ module.exports.handler = async (event, context, callback) => {
         const elapsed = Date.now() - start;
 
         console.log('resp.body: ' + resp.body);
-
+        console.log('typeof resp.body: ' + (typeof resp.body));
         console.log(`${url} returned a ${resp.statusCode} and took ${elapsed} ms...`)
 
         summary.push({
-            url: url,
-            elapsed: elapsed,
-            statusCode: resp.statusCode,
+            step: step,
             timestamp: start,
-            body: resp.body
+            elapsed: elapsed,
+            downstream_url: url,
+            downstream_statusCode: resp.statusCode,
+            downstream_headers: resp.headers,
+            downstream_response: JSON.parse(resp.body)
         });
 
         // Collect headers

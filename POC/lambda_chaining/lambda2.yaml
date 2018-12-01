@@ -9,7 +9,7 @@ properties:
   secrets: []
   public: true
   pre_warm: 0
-  code: '#{LambdaSource src/child2.js}'
+  code: '#{LambdaSource src/child.js}'
   cpus: 0.1
   code_type: code
   headers:

@@ -1,8 +1,8 @@
 resource_type: Gestalt::Resource::ApiEndpoint
-name: /lambda2
+name: /lambda4
 description: Factorial Example Endpoint
 properties:
-  resource: /lambda2
+  resource: /lambda4
   methods:
   - GET
   - PUT
@@ -19,7 +19,7 @@ properties:
   synchronous: true
   is_http_aware: true
   implementation_type: lambda
-  implementation_id: '#{Lambda lambda2}'
+  implementation_id: '#{Lambda lambda4}'
 context:
   api:
     id: '#{Api test}'

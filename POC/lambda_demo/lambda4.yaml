@@ -1,5 +1,5 @@
 resource_type: Gestalt::Resource::Node::Lambda
-name: lambda1
+name: lambda4
 description: ''
 properties:
   apiendpoints: []
@@ -9,7 +9,7 @@ properties:
   secrets: []
   public: true
   pre_warm: 0
-  code: '#{LambdaSource src/lambda1.js}'
+  code: '#{LambdaSource src/lambda4.js}'
   cpus: 0.1
   code_type: code
   headers:

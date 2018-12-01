@@ -1,5 +1,5 @@
 resource_type: Gestalt::Resource::Node::Lambda
-name: lambda1
+name: lambda5
 description: ''
 properties:
   apiendpoints: []
@@ -9,7 +9,7 @@ properties:
   secrets: []
   public: true
   pre_warm: 0
-  code: '#{LambdaSource src/lambda1.js}'
+  code: '#{LambdaSource src/lambda5.py}'
   cpus: 0.1
   code_type: code
   headers:
@@ -18,7 +18,7 @@ properties:
   periodic_info: {}
   timeout: 60
   handler: handler
-  runtime: nodejs
+  runtime: python
   env:
     TEST1: Test 1 value
   memory: 128

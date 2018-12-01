@@ -12,7 +12,7 @@ module.exports.handler = async (event, context, callback) => {
     const step = parseInt(context.headers.step);
 
     // Append to the body
-    const body = event.body ? event.body : {};
+    const body = event.body ? JSON.parse(event.body) : {};
 
     console.log('body: ' + JSON.stringify(body));
 

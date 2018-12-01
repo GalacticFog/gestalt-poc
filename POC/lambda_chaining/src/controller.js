@@ -34,10 +34,13 @@ module.exports.handler = async (event, context, callback) => {
         method: 'POST',
         resolveWithFullResponse: true,
         headers: context.headers || {},
+        timeout: 10000,
         body: ''
     }
 
     let step = 0;
+
+    const t0 = Date.now();
 
     console.log(`Will process ${urls.length} urls...`);
     for (let url of urls) {
@@ -50,36 +53,59 @@ module.exports.handler = async (event, context, callback) => {
 
         console.log(`Invoking ${url}...`)
 
-        const resp = await request({ uri: url, ...options });
+        try {
 
-        const elapsed = Date.now() - start;
+            const resp = await request({ uri: url, ...options });
 
-        console.log('resp.body: ' + resp.body);
-        console.log('typeof resp.body: ' + (typeof resp.body));
-        console.log(`${url} returned a ${resp.statusCode} and took ${elapsed} ms...`)
+            const elapsed = Date.now() - start;
 
-        summary.push({
-            step: step,
-            timestamp: start,
-            elapsed: elapsed,
-            downstream_url: url,
-            downstream_statusCode: resp.statusCode,
-            downstream_headers: resp.headers,
-            downstream_response: JSON.parse(resp.body)
-        });
+            console.log('resp.body: ' + resp.body);
+            console.log('typeof resp.body: ' + (typeof resp.body));
+            console.log(`${url} returned a ${resp.statusCode} and took ${elapsed} ms...`)
 
-        // Collect headers
-        options.headers = Object.assign(options.headers, JSON.parse(resp.body).headers);
-        options.body = resp.body; // Use response from this call for the next downstream call
+            summary.push({
+                step: step,
+                timestamp: start,
+                elapsed: elapsed,
+                downstream_url: url,
+                downstream_statusCode: resp.statusCode,
+                downstream_headers: resp.headers,
+                downstream_response: JSON.parse(resp.body)
+            });
+
+            // Collect headers
+            options.headers = Object.assign(options.headers, JSON.parse(resp.body).headers);
+            options.body = resp.body; // Use response from this call for the next downstream call
+        } catch (err) {
+
+            console.log(`Enountered an error: ${error.message}`);
+
+            const elapsed = Date.now() - start;
+
+            summary.push({
+                step: step,
+                error: err.message,
+                timestamp: start,
+                elapsed: elapsed,
+                downstream_url: url,
+            });
+        }
     }
 
-    console.log(`Wrapping up, got ${summary.length} results`);
+    const elapsed = Date.now() - t0;
+
+    console.log(`Wrapping up, got ${summary.length} results after ${elapsed} ms`);
+
+    const body = {
+        summary: summary,
+        elapsed: elapsed
+    };
 
     const response = {
         statusCode: 200,
         headers: options.headers,
-        body: JSON.stringify(summary, null, 2)
-    }
+        body: JSON.stringify(body, null, 2)
+    };
 
     callback(null, response);
 };

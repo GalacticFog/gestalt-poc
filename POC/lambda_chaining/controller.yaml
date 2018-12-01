@@ -16,10 +16,18 @@ properties:
     Accept: text/plain
     Content-Type: text/plain
   periodic_info: {}
-  timeout: 60
+  timeout: 600
   handler: handler
   runtime: nodejs
   env:
     LAMBDA_1: '#{Lambda child-lambda-1}'
     LAMBDA_2: '#{Lambda child-lambda-2}'
-  memory: 128
+    LAMBDA_3: '#{Lambda child-lambda-3}'
+    # LAMBDA_4: '# {Lambda child-lambda-4}'
+    # LAMBDA_5: '# {Lambda child-lambda-5}'
+    # LAMBDA_6: '# {Lambda child-lambda-6}'
+    # LAMBDA_7: '# {Lambda child-lambda-7}'
+    # LAMBDA_8: '# {Lambda child-lambda-8}'
+    # LAMBDA_9: '# {Lambda child-lambda-9}'
+    # LAMBDA_10: '# {Lambda child-lambda-10}'
+  memory: 250

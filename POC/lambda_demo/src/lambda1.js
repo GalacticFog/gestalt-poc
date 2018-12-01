@@ -2,36 +2,48 @@ const request = require('request-promise-native');
 
 module.exports.handler = async (event, context, callback) => {
 
-    // const options = {
-    //     uri: 'http://www.galacticfog.com',
-    //     resolveWithFullResponse: true
-    // }
 
-    // const response = await request(options);
+    const urls = [
+        'http://www.galacticfog.com',
+        'http://www.google.com',
+        'http://www.cnn.com',
+        'http://www.osnews.com',
+        'http://www.arstechnica.com',
+    ];
 
-    // callback(null, response.body);
+    const options = {
+        resolveWithFullResponse: true
+    }
 
-    // callback(null, JSON.stringify({ event: event, context: JSON.parse(context), env: process.env }, null, 2));
+    const summary = [];
 
+    for (let url of urls) {
 
-    // const timeout = ms => new Promise(res => setTimeout(res, ms))
+        const start = Date.now();
 
-    // console.error("Waiting a time...")
+        console.log(`Visiting ${url}...`)
 
-    // await timeout(5000);
+        const response = await request({ uri: url, ...options });
 
-    console.log('This is a log message');
+        const elapsed = Date.now() - start;
 
-    console.error('This is another log message');
+        console.log(`${url} returned a ${response.statusCode} and took ${elapsed} ms...`)
+
+        summary.push({
+            url: url,
+            elapsed: elapsed,
+            statusCode: response.statusCode,
+            timestamp: start
+        });
+    }
+
+    console.log(`Wrapping up, got ${summary.length} results`);
 
     const response = {
         statusCode: 201,
         headers: { 'test-header': 'test123' },
-        body: 'Successful test 2'
+        body: JSON.stringify(summary, null, 2)
     }
 
-    callback(null, JSON.stringify(response, null, 2));
+    callback(null, response);
 };
-
-
-

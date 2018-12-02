@@ -1,6 +1,6 @@
 resource_type: 'Gestalt::Resource::Environment'
 name: local
 description: Local Environment
-contextPath: '/training/student-#{Config student_id}'
+contextPath: '/#{Config org}/student-#{Config student_id}'
 properties:
   environment_type: development

@@ -1,6 +1,6 @@
 resource_type: 'Gestalt::Resource::Organization'
-name: poc
-description: POC Sample Organization
+name: training
+description: Training Organization
 properties:
-  fqon: poc
+  fqon: training
 contextPath: /root

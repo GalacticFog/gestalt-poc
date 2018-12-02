@@ -1,6 +1,6 @@
 resource_type: 'Gestalt::Resource::Environment'
 name: test
 description: Test
-context: /poc/sample
+contextPath: /poc/sample
 properties:
   environment_type: test

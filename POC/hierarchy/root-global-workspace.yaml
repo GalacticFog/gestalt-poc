@@ -1,4 +1,4 @@
 resource_type: 'Gestalt::Resource::Workspace'
 name: global
 description: global
-context: /root
+contextPath: /root

@@ -1,0 +1,9 @@
+resource_type: Gestalt::Resource::Api
+name: 'student-#{Config student_id}-local'
+description: Local Environment API
+properties:
+  provider:
+    locations:
+    - '#{Provider /root/default-kong}'
+    id: '#{Provider /root/default-gwm}'
+contextPath: '/training/student-#{Config student_id}/local'

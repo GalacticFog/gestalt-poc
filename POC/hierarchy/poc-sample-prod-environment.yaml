@@ -1,6 +1,6 @@
 resource_type: 'Gestalt::Resource::Environment'
 name: prod
 description: Production
-context: /poc/sample
+contextPath: /poc/sample
 properties:
   environment_type: production

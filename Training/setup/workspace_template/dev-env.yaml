@@ -1,6 +1,6 @@
 resource_type: 'Gestalt::Resource::Environment'
 name: dev
-description: Sandbox Development Envioronment
-contextPath: /sandbox105/dev-sandbox
+description: Development Environment
+contextPath: '/training/student-#{Config student_id}'
 properties:
   environment_type: development

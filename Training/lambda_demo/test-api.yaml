@@ -1,6 +1,6 @@
 resource_type: Gestalt::Resource::Api
-name: test
-description: Test API
+name: 'student-#{Config student_id}-lambda-demo'
+description: Local Environment API
 properties:
   provider:
     locations:

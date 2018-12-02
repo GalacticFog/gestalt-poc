@@ -3,4 +3,4 @@ name: sandbox105
 description: Sandbox 105 Hello
 properties:
   fqon: sandbox105
-context: /root
+contextPath: /root

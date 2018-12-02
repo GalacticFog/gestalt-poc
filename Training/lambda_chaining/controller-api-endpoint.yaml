@@ -1,8 +1,8 @@
 resource_type: Gestalt::Resource::ApiEndpoint
-name: /lambda4
-description: Factorial Example Endpoint
+name: /one
+description: Laser results service
 properties:
-  resource: /lambda4
+  resource: /one
   methods:
   - GET
   - PUT
@@ -19,7 +19,7 @@ properties:
   synchronous: true
   is_http_aware: true
   implementation_type: lambda
-  implementation_id: '#{Lambda lambda4}'
+  implementation_id: '#{Lambda controller}'
 context:
   api:
-    id: '#{Api test}'
+    id: '#{Api #{Config api}}'

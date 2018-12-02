@@ -1,4 +1,4 @@
 resource_type: 'Gestalt::Resource::Workspace'
 name: dev-sandbox
 description: Developer Sandbox
-context: /sandbox105
+contextPath: /sandbox105

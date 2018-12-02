@@ -1,0 +1,55 @@
+
+
+============= Update meta Command:
+
+kubectl get deploy -n gestalt-system gestalt-meta -oyaml > gestalt-meta.yaml
+
+Update image tag: 
+
+	gestalt-meta:release-2.3.6
+
+Add the following:
+
+	command:
+	- ./bin/gestalt-meta
+	args:
+	- -Dhttps.proxyHost=48.135.149.100
+	- -Dhttps.proxyPort=8080
+	- -Dhttp.proxyHost=48.135.149.100
+	- -Dhttp.proxyPort=8080
+	- -Dhttp.nonProxyHosts=*.prudential.com|*.svc.cluster.local|*.gestalt-system|*.gestalt-system.svc.cluster.local
+
+kubectl apply -f gestalt-meta.yaml
+
+============== Update UI
+
+docker.io/galacticfog/gestalt-ui-react:release-2.3.6
+docker.io/galacticfog/gestalt-policy:release-2.3.6
+docker.io/galacticfog/ecs-sidecar:release-2.3.6
+docker.io/galacticfog/nginx-artifact-server:release-2.3.6
+
+kubectl get deploy -n gestalt-system gestalt-ui -oyaml > gestalt-ui.yaml
+
+==============
+
+./get-meta-info.sh
+
+Modify poc.env
+
+
+// May not need this - livelieness probe
+$ kubectl exec -ti -n 1e2a8e3b-76c5-48fa-a1b6-7d3d5efa2680   pol-7dd44c84fd-kd6b2 -- bash
+bash-4.3$ wget localhost:9000
+
+
+
+
+
+	cli_login.sh
+
+	kubectl apply -f nginx_artifact_server/gestalt-artifact-server-deploy.yaml
+
+deploy-kong-lambda.sh
+
+ACfe277124fe43d8370b7ecf5f41937c78
+eeb8fc2ab03bc2bc9928dc68d696d022

@@ -1,6 +1,6 @@
 resource_type: Gestalt::Resource::Api
 name: '#{Config api}'
-description: Local Environment API
+description: 'Lambda Chaining API'
 properties:
   provider:
     locations:

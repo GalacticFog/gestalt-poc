@@ -1,0 +1,4 @@
+resource_type: 'Gestalt::Resource::Workspace'
+name: 'demo'
+description: 'Demo Workspace'
+contextPath: /training

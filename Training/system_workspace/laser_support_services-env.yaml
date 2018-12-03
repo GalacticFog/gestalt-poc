@@ -1,5 +1,6 @@
 resource_type: 'Gestalt::Resource::Environment'
-name: lambda_demo
-description: Lambda Demo
+name: laser_support_services
+description: Asynchronous Lambdas
 properties:
   environment_type: development
+contextPath: /training/system

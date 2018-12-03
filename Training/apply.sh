@@ -1,22 +1,33 @@
-#!/bin/bash
+#!/bin/bash -x
 
 set -e
 
 # fog meta POST '/migrate?version=V23'
 
-echo "Creating Training Org"
+echo "Training Org"
 fog apply -f setup/training-org.yaml
 
-echo "Creating Demo Workspace"
+echo "Demo Workspace"
 fog apply -d setup/demo_workspace
 
-org=training
+echo "System Workspace"
+fog apply -d system_workspace
 
-echo "Creating lambda_demo environment"
-fog apply -f lambda_demo/env.yaml  --context /$org/demo
-fog apply -d lambda_demo  --context /$org/demo/lambda_demo --params api=demo-lambda-demo
+echo "Demo Environments"
+fog apply -d demo_environments --context /training/demo
 
-echo "Creating lambda_chaining environment"
-fog apply -f lambda_chaining/env.yaml  --context /$org/demo
-fog apply -d lambda_chaining  --context /$org/demo/lambda_chaining --params api=demo-lambda-chaining
+echo "Lambda demos"
+fog apply -d lambda_demo  --context /training/demo/lambda_demo --params api=demo-lambda-demo
 
+echo "Lambda chaining"
+fog apply -d lambda_chaining  --context /training/demo/lambda_chaining --params api=demo-lambda-chaining
+
+echo "Periodic lambdas"
+fog apply -d periodic_lambdas  --context /training/demo/periodic_lambdas
+
+echo "Async lambdas"
+fog apply -d async_lambdas  --context /training/demo/async_lambdas --params api=demo-async-lambdas
+
+
+echo "Laser support services"
+fog apply -d laser_support_services --context /training/system/laser_support_services

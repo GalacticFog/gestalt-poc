@@ -2,6 +2,8 @@
 
 set -e
 
+# fog meta POST '/migrate?version=V23'
+
 echo "Creating Training Org"
 fog apply -f setup/training-org.yaml
 

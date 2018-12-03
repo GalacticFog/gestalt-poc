@@ -1,6 +1,6 @@
 resource_type: Gestalt::Resource::Node::Lambda
 name: lambda5
-description: ''
+description: 'Simple Python example'
 properties:
   apiendpoints: []
   provider:
@@ -19,6 +19,5 @@ properties:
   timeout: 60
   handler: handler
   runtime: python
-  env:
-    TEST1: Test 1 value
+  env: {}
   memory: 128

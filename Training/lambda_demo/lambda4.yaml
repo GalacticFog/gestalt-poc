@@ -1,6 +1,6 @@
 resource_type: Gestalt::Resource::Node::Lambda
 name: lambda4
-description: ''
+description: 'Returns a 500 with stack trace'
 properties:
   apiendpoints: []
   provider:
@@ -19,6 +19,5 @@ properties:
   timeout: 60
   handler: handler
   runtime: nodejs
-  env:
-    TEST1: Test 1 value
+  env: {}
   memory: 128

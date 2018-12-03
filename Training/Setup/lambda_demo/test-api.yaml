@@ -1,0 +1,8 @@
+resource_type: Gestalt::Resource::Api
+name: '#{Config api}'
+description: Local Environment API
+properties:
+  provider:
+    locations:
+    - '#{Provider /root/default-kong}'
+    id: '#{Provider /root/default-gwm}'

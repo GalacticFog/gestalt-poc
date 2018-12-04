@@ -1,6 +1,8 @@
 
 set -e
 
+user=$1
+
 ./user-search.sh $user
 
 fog meta POST /sync

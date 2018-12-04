@@ -1,4 +1,4 @@
 resource_type: 'Gestalt::Resource::Workspace'
-name: 'student-#{Config student_id}'
-description: 'Student #{Config student_id} Training Workspace'
+name: '#{Config student_id}'
+description: '#{Config student_id} Training Workspace'
 contextPath: '/#{Config org}'

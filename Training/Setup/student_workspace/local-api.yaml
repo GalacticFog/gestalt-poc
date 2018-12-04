@@ -1,5 +1,5 @@
 resource_type: Gestalt::Resource::Api
-name: 'training-#{Config student_id}-local'
+name: 'training-#{Config user_lowercase}-local'
 description: Local Environment API
 properties:
   provider:

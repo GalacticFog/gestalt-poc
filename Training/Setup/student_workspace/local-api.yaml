@@ -6,4 +6,4 @@ properties:
     locations:
     - '#{Provider /root/default-kong}'
     id: '#{Provider /root/default-gwm}'
-contextPath: '/#{Config org}/#{Config student_id}/local'
+contextPath: '/#{Config org}/#{Config user_lowercase}/local'

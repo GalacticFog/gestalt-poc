@@ -20,5 +20,5 @@ properties:
   handler: handler
   runtime: nodejs
   env:
-    SERVICE_URL: '#{laser_url}/results'
+    SERVICE_URL: '#{Config laser_url}/results'
   memory: 128

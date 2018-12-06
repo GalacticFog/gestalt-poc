@@ -4,7 +4,7 @@ description: 'Access to Elastic Search data'
 properties:
   apiendpoints: []
   provider:
-    id: '#{Provider /root/default-laser}'
+    id: '#{Provider #{Config laser_provider}}'
     locations: []
   secrets: []
   public: true

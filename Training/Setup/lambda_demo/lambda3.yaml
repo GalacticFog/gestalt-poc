@@ -4,7 +4,7 @@ description: 'Also sets a custom output header, but returns a 500 response'
 properties:
   apiendpoints: []
   provider:
-    id: '#{Provider /root/default-laser}'
+    id: '#{Provider #{Config laser_provider}}'
     locations: []
   secrets: []
   public: true

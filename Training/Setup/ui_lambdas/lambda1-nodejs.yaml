@@ -1,6 +1,6 @@
 resource_type: Gestalt::Resource::Node::Lambda
-name: child-lambda-2
-description: 'Demo of lambda chaining'
+name: lambda1-nodejs
+description: 'Calls a sequence of downstream URLs and returns the result'
 properties:
   apiendpoints: []
   provider:
@@ -9,16 +9,15 @@ properties:
   secrets: []
   public: true
   pre_warm: 0
-  code: '#{LambdaSource src/child.js}'
+  code: '#{LambdaSource src/lambda1.js}'
   cpus: 0.1
   code_type: code
   headers:
     Accept: text/plain
-    Content-Type: text/plain
+    Content-Type: text/html
   periodic_info: {}
   timeout: 60
   handler: handler
   runtime: nodejs
-  env:
-    TEST1: Test 1 value
+  env: {}
   memory: 128

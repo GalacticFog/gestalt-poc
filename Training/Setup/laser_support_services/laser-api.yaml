@@ -4,5 +4,5 @@ description: Exposed Laser API
 properties:
   provider:
     locations:
-    - '#{Provider /root/default-kong}'
-    id: '#{Provider /root/default-gwm}'
+    - '#{Provider #{Config kong_provider}}'
+    id: '#{Provider #{Config gwm_provider}}'

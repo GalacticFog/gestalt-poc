@@ -1,1 +1,13 @@
 # laser_url: 'http://lsr.f27397b0-24cd-45b3-a03a-eb5a93ff3b88.svc.cluster.local:9000'
+
+
+laser_url: 'lsr.a8b52224-11d8-443a-a419-e1682e4c09dc.marathon.l4lb.thisdcos.directory'
+laser_provider: /root/laser
+gwm_provider: /root/gwm
+kong_provider: /root/kong
+
+
+# laser_url: 'lsr.a8b52224-11d8-443a-a419-e1682e4c09dc.marathon.l4lb.thisdcos.directory'
+# laser_provider: /root/default-laser
+# gwm_provider: /root/default-gwm
+# kong_provider: /root/default-kong

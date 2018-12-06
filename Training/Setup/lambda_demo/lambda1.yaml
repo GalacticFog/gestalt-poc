@@ -4,7 +4,7 @@ description: 'Calls a sequence of downstream URLs and returns the result'
 properties:
   apiendpoints: []
   provider:
-    id: '#{Provider /root/default-laser}'
+    id: '#{Provider #{Config laser_provider}}'
     locations: []
   secrets: []
   public: true

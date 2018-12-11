@@ -19,117 +19,151 @@ module.exports.handler = async (event, context, callback) => {
     }
 
     if (context.method == 'POST') {
-        callback(null, sendSms(context, event));
-        return;
+        return callback(null, await doPost(context, event));
     }
 
-    callback("Method not found", null);
+    const response = {
+        statusCode: 500,
+        headers: {},
+        body: Error().stack
+    }
 
-
-
-    // const response = {
-    //     statusCode: 201,
-    //     headers: {},
-    //     body: JSON.stringify(data)
-    // }
-
-    // callback(null, data);
+    callback(null, response);
 };
 
 
-// function doPost(url) {
-//     const options = {
-//         method: 'POST',
-//         resolveWithFullResponse: true,
-//         headers: context.headers || {},
-//         timeout: 10000,
-//         body: ''
-//     }
+async function doPost(context, event) {
 
-//     const start = Date.now();
+    // return {
+    //     statusCode: 200,
+    //     headers: {},
+    //     body: JSON.stringify({
+    //         event: event
+    //     })
+    // };
 
-//     console.log(`Invoking ${url}...`)
+    const url = process.env.DOWNSTREAM_URL;
+    const options = {
+        method: process.env.DOWNSTREAM_HTTP_METHOD,
+        resolveWithFullResponse: true,
+        headers: { 'Accept': 'text/plain' }, //context.headers || {},
+        timeout: 10000,
+        // body: JSON.stringify({
+        //     context: context,
+        //     event: event
+        // })
+    }
 
-//     const summary = [];
+    if (options.method != 'GET') {
+        options.body = event;
+    }
 
-//     try {
+    const start = Date.now();
 
-//         const resp = await request({ uri: url, ...options });
+    console.log(`Invoking ${url}...`)
 
-//         const elapsed = Date.now() - start;
+    const summary = [];
 
-//         console.log('resp.body: ' + resp.body);
-//         console.log('typeof resp.body: ' + (typeof resp.body));
-//         console.log(`${url} returned a ${resp.statusCode} and took ${elapsed} ms...`)
+    try {
 
-//         summary.push({
-//             timestamp: start,
-//             elapsed: elapsed,
-//             downstream_url: url,
-//             downstream_statusCode: resp.statusCode,
-//             downstream_headers: resp.headers,
-//             downstream_response: JSON.parse(resp.body)
-//         });
+        const resp = await request({ uri: url, ...options });
 
-//         // Collect headers
-//         options.headers = Object.assign(options.headers, JSON.parse(resp.body).headers);
-//         options.body = resp.body; // Use response from this call for the next downstream call
-//     } catch (err) {
+        const elapsed = Date.now() - start;
 
-//     }
-// }
+        console.log('resp.body: ' + resp.body);
+        console.log('typeof resp.body: ' + (typeof resp.body));
+        console.log(`${url} returned a ${resp.statusCode} and took ${elapsed} ms...`)
 
-function getHtml() {
+        summary.push({
+            timestamp: start,
+            elapsed: elapsed,
+            downstream_url: url,
+            downstream_statusCode: resp.statusCode,
+            downstream_headers: resp.headers,
+            downstream_response: resp.body
+        });
 
-        var MultiString = function (f) {
-            return f.toString().split('\n').slice(1, -1).join('\n');
+        return {
+            statusCode: 200,
+            headers: {},
+            body: JSON.stringify(summary, null, 2)
         };
 
-        var ux = MultiString(function () {/**<html>
-<head>
-    <title>Send message</title>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-</head>
-<body class="bg-light">
-    <div class="container">
-        <div class="row" style="margin:100px;">
-            <h2>Send message</h2>
-            <textarea id="message" placeholder="Message" autofocus="autofocus" onblur="messageBlur()" onfocus="messageFocused()" class="form-control" style="margin-bottom:16px; min-width:150px;"></textarea>
-            <button onclick="sendClick()" class="btn btn-primary" style="width:150px;">Send</button>
+    } catch (err) {
+        return {
+            statusCode: 500,
+            headers: {},
+            body: JSON.stringify({
+                error: err.stack
+            })
+        };
+    }
+}
 
-            <div id="status" style="margin-left:32px;"></div>
+
+function getHtml() {
+    return `
+    <html>
+    <head>
+        <title>${process.env.TITLE || 'Request to Provision new VM'}</title>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    </head>
+    <body class="bg-light">
+        <div class="container">
+                <div class="row" style="margin:100px;">
+                    <form id="form1">
+                        <h2>${process.env.FORM_TITLE || 'Default title (replace using FORM_TITLE variable)'}</h2>
+                        <input id="name" name="name" type="text" placeholder="Name" class="form-control"  style="margin-bottom:16px; min-width:150px;"></input>
+                        <input id="num_instances" name="num_instances" type="number" placeholder="Number of Instances" class="form-control"  style="margin-bottom:16px; min-width:150px;"></input>
+                        <input id="cpus" name="cpus" type="number" placeholder="CPUs" class="form-control"  style="margin-bottom:16px; min-width:150px;"></input>
+                        <input id="memory" name="memory" type="number" placeholder="Memory (GiB)" class="form-control"  style="margin-bottom:16px; min-width:150px;"></input>
+
+                        <div class="radio">
+                            <label><input type="radio" name="os_type" value="RHEL" checked>RHEL 7.x</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="os_type" value="WINDOWS">Windows 10 Professional</label>
+                        </div>
+
+                        <label class="checkbox-inline"><input name="ssd_storage" type="checkbox" value="">SSD Storage</label>
+
+                        <textarea id="user_data" name="user_data" placeholder="User Data" autofocus="autofocus" onblur="messageBlur()" onfocus="messageFocused()" class="form-control" style="margin-bottom:16px; min-width:150px;"></textarea>
+                        </form>
+
+                    <button onclick="sendClick()" class="btn btn-primary" style="width:200px;">Initiate VM Provisioning</button>
+
+                    <div id="status" style="margin-left:32px;"></div>
+                </div>
         </div>
-    </div>
-
-    <script>
-        
-        function messageFocused() {
-            $('#status').text('');
-        }
-
-        function sendClick() {
-            var msg = $('#message').val();
-
-            if (!msg) {
-                $('#status').text('Write some text');
-                return;
+    
+        <script>
+            
+            function messageFocused() {
+                $('#status').text('');
+            }
+    
+            function sendClick() {
+                var msg = {};
+                $.each($('#form1').serializeArray(), function() {
+                  msg[this.name] = this.value;
+                });
+            
+    
+                $('#status').text('Sending...');
+                var url = './lambda1';
+                $.post(url, JSON.stringify(msg), function (data, error) {
+                    $('#status').text(data);
+                }).fail(
+                    function (error) {                    
+                        $('#status').text('Error code: ' + error.status);
+                    });
             }
 
-            $('#status').text('Sending...');
-            var url = '';
-            $.post(url, JSON.stringify({ msg: msg }), function (data, error) {
-                $('#status').text(data);
-            }).fail(
-                function (error) {                    
-                    $('#status').text('Error code: ' + error.status);
-                });
-        }
 
-    </script>
-</body>
-</html>
- **/});
+        </script>
+    </body>
+    </html>    
+    `
+}
 
-        return ux;
-    }

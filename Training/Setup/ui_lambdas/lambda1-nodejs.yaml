@@ -19,5 +19,8 @@ properties:
   timeout: 60
   handler: handler
   runtime: nodejs
-  env: {}
+  env:
+    FORM_TITLE: 'VM Provisioning Action'
+    DOWNSTREAM_HTTP_METHOD: 'GET'
+    DOWNSTREAM_URL: 'http://test'
   memory: 128

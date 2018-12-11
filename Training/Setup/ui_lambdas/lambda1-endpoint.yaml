@@ -7,7 +7,7 @@ properties:
   - GET
   - PUT
   - POST
-  - DELETE
+  # - DELETE
   plugins:
     rateLimit:
       enabled: false
@@ -20,6 +20,7 @@ properties:
   is_http_aware: true
   implementation_type: lambda
   implementation_id: '#{Lambda lambda1-nodejs}'
+  hosts: []
 context:
   api:
     id: '#{Api #{Config api}}'

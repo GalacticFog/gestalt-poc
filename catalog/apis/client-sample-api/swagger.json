@@ -1,0 +1,463 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "2017-07-20T13:52:20Z",
+      "title": "project",
+      "description": "API endpoints to get project related data."
+    },
+    "schemes": [
+      "https"
+    ],
+    "paths": {
+      "/v1/project/from-ip-address/{ip_address}/project-id": {
+        "get": {
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "ip_address",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "200 response",
+              "schema": {
+                "$ref": "#/definitions/Empty"
+              }
+            }
+          },
+          "security": [
+            {
+              "api_key": []
+            }
+          ],
+          "x-amazon-apigateway-integration": {
+            "responses": {
+              "default": {
+                "statusCode": "200"
+              }
+            },
+            "uri": "arn:aws:apigateway:{{ Region }}:lambda:path/2015-03-31/functions/arn:aws:lambda:{{ Region }}:{{ Account }}:function:GetProjectIdFromIpAddress/invocations",
+            "passthroughBehavior": "when_no_templates",
+            "httpMethod": "POST",
+            "contentHandling": "CONVERT_TO_TEXT",
+            "type": "aws_proxy"
+          }
+        }
+      },
+      "/v1/project/from-account/{aws_account_id}/project-id": {
+        "get": {
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "aws_account_id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "200 response",
+              "schema": {
+                "$ref": "#/definitions/Empty"
+              }
+            }
+          },
+          "security": [
+            {
+              "api_key": []
+            }
+          ],
+          "x-amazon-apigateway-integration": {
+            "responses": {
+              "default": {
+                "statusCode": "200"
+              }
+            },
+            "uri": "arn:aws:apigateway:{{ Region }}:lambda:path/2015-03-31/functions/arn:aws:lambda:{{ Region }}:{{ Account }}:function:GetProjectIdFromAWSAccountId/invocations",
+            "passthroughBehavior": "when_no_templates",
+            "httpMethod": "POST",
+            "contentHandling": "CONVERT_TO_TEXT",
+            "type": "aws_proxy"
+          }
+        }
+      },
+      "/v1/project/from-account/{aws_account_id}/info": {
+        "get": {
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "aws_account_id",
+              "in": "path",
+              "required": true,
+  
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "200 response",
+              "schema": {
+                "$ref": "#/definitions/Empty"
+              }
+            }
+          },
+          "security": [
+            {
+              "api_key": []
+            }
+          ],
+          "x-amazon-apigateway-integration": {
+            "responses": {
+              "default": {
+                "statusCode": "200"
+              }
+            },
+            "uri": "arn:aws:apigateway:{{ Region }}:lambda:path/2015-03-31/functions/arn:aws:lambda:{{ Region }}:{{ Account }}:function:GetProjectInfoFromAWSAccountId/invocations",
+            "passthroughBehavior": "when_no_templates",
+            "httpMethod": "POST",
+            "contentHandling": "CONVERT_TO_TEXT",
+            "type": "aws_proxy"
+          }
+        }
+     },
+      "/v1/project/{id}/info": {
+        "get": {
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "200 response",
+              "schema": {
+                "$ref": "#/definitions/Empty"
+              }
+            }
+          },
+          "security": [
+            {
+              "api_key": []
+            }
+          ],
+          "x-amazon-apigateway-integration": {
+            "responses": {
+              "default": {
+                "statusCode": "200"
+              }
+            },
+            "uri": "arn:aws:apigateway:{{ Region }}:lambda:path/2015-03-31/functions/arn:aws:lambda:{{ Region }}:{{ Account }}:function:GetProjectInfo/invocations",
+            "passthroughBehavior": "when_no_templates",
+            "httpMethod": "POST",
+            "contentHandling": "CONVERT_TO_TEXT",
+            "type": "aws_proxy"
+          }
+        },
+        "post": {
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "SaveInfoModel",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/SaveInfoModel"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "200 response",
+              "schema": {
+                "$ref": "#/definitions/Empty"
+              }
+            }
+          },
+          "security": [
+            {
+              "api_key": []
+            }
+          ],
+          "x-amazon-apigateway-integration": {
+            "responses": {
+              "default": {
+                "statusCode": "200"
+              }
+            },
+            "uri": "arn:aws:apigateway:{{ Region }}:lambda:path/2015-03-31/functions/arn:aws:lambda:{{ Region }}:{{ Account }}:function:SaveProjectInfo/invocations",
+            "passthroughBehavior": "when_no_templates",
+            "httpMethod": "POST",
+            "contentHandling": "CONVERT_TO_TEXT",
+            "type": "aws_proxy"
+          }
+        }
+      },
+      "/v1/project/{id}/info/extended": {
+        "get": {
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "200 response",
+              "schema": {
+                "$ref": "#/definitions/Empty"
+              }
+            }
+          },
+          "security": [
+            {
+              "api_key": []
+            }
+          ],
+          "x-amazon-apigateway-integration": {
+            "responses": {
+              "default": {
+                "statusCode": "200"
+              }
+            },
+            "uri": "arn:aws:apigateway:{{ Region }}:lambda:path/2015-03-31/functions/arn:aws:lambda:{{ Region }}:{{ Account }}:function:GetExtendedProjectInfo/invocations",
+            "passthroughBehavior": "when_no_templates",
+            "httpMethod": "POST",
+            "contentHandling": "CONVERT_TO_TEXT",
+            "type": "aws_proxy"
+          }
+        }
+      },
+      "/v1/project/{id}/aws-account-id": {
+        "get": {
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "200 response",
+              "schema": {
+                "$ref": "#/definitions/Empty"
+              }
+            }
+          },
+          "security": [
+            {
+              "api_key": []
+            }
+          ],
+          "x-amazon-apigateway-integration": {
+            "responses": {
+              "default": {
+                "statusCode": "200"
+              }
+            },
+            "uri": "arn:aws:apigateway:{{ Region }}:lambda:path/2015-03-31/functions/arn:aws:lambda:{{ Region }}:{{ Account }}:function:GetAWSAccountId/invocations",
+            "passthroughBehavior": "when_no_templates",
+            "httpMethod": "POST",
+            "contentHandling": "CONVERT_TO_TEXT",
+            "type": "aws_proxy"
+          }
+        }
+      },
+      "/v1/project/from-account/{aws_account_id}/info/extended": {
+        "get": {
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "aws_account_id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "200 response",
+              "schema": {
+                "$ref": "#/definitions/Empty"
+              }
+            }
+          },
+          "security": [
+            {
+              "api_key": []
+            }
+          ],
+          "x-amazon-apigateway-integration": {
+            "responses": {
+              "default": {
+                "statusCode": "200"
+              }
+            },
+            "uri": "arn:aws:apigateway:{{ Region }}:lambda:path/2015-03-31/functions/arn:aws:lambda:{{ Region }}:{{ Account }}:function:GetExtendedProjectInfoFromAWSAccountID/invocations",
+            "passthroughBehavior": "when_no_templates",
+            "httpMethod": "POST",
+            "contentHandling": "CONVERT_TO_TEXT",
+            "type": "aws_proxy"
+          }
+        }
+      },
+      "/v1/project/{id}/account-info": {
+        "get": {
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "200 response",
+              "schema": {
+                "$ref": "#/definitions/Empty"
+              }
+            }
+          },
+          "security": [
+            {
+              "api_key": []
+            }
+          ],
+          "x-amazon-apigateway-integration": {
+            "responses": {
+              "default": {
+                "statusCode": "200"
+              }
+            },
+            "uri": "arn:aws:apigateway:{{ Region }}:lambda:path/2015-03-31/functions/arn:aws:lambda:{{ Region }}:{{ Account }}:function:GetAccountInfo/invocations",
+            "passthroughBehavior": "when_no_templates",
+            "httpMethod": "POST",
+            "contentHandling": "CONVERT_TO_TEXT",
+            "type": "aws_proxy"
+          }
+        }
+      },
+      "/v1/project/info": {
+        "get": {
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "200 response",
+              "schema": {
+                "$ref": "#/definitions/Empty"
+              }
+            }
+          },
+          "security": [
+            {
+              "api_key": []
+            }
+          ],
+          "x-amazon-apigateway-integration": {
+            "responses": {
+              "default": {
+                "statusCode": "200"
+              }
+            },
+            "uri": "arn:aws:apigateway:{{ Region }}:lambda:path/2015-03-31/functions/arn:aws:lambda:{{ Region }}:{{ Account }}:function:GetAllProjectInfo/invocations",
+            "passthroughBehavior": "when_no_templates",
+            "httpMethod": "POST",
+            "contentHandling": "CONVERT_TO_TEXT",
+            "type": "aws_proxy"
+          }
+        }
+      },
+      "/v1/project/ids": {
+        "get": {
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "200 response",
+              "schema": {
+                "$ref": "#/definitions/Empty"
+              }
+            }
+          },
+          "security": [
+            {
+              "api_key": []
+            }
+          ],
+          "x-amazon-apigateway-integration": {
+            "responses": {
+              "default": {
+                "statusCode": "200"
+              }
+            },
+            "uri":"arn:aws:apigateway:{{ Region }}:lambda:path/2015-03-31/functions/arn:aws:lambda:{{ Region }}:{{ Account }}:function:GetProjectIds/invocations",
+            "passthroughBehavior": "when_no_templates",
+            "httpMethod": "POST",
+            "contentHandling": "CONVERT_TO_TEXT",
+            "type": "aws_proxy"
+          }
+        }
+      }
+    },
+    "securityDefinitions": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "x-api-key",
+        "in": "header"
+      }
+    },
+    "definitions": {
+      "Empty": {
+        "type": "object",
+        "title": "Empty Schema"
+      },
+      "SaveInfoModel": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string"
+          },
+          "AWSAccountID": {
+            "type": "string"
+          }
+        },
+        "title": "Input contract for SaveInfoModel endpoint"
+      }
+    }
+  }

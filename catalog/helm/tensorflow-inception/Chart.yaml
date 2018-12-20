@@ -1,0 +1,20 @@
+name: tensorflow-inception
+version: 3.2.3
+appVersion: 1.11.1
+description: Open-source software library for serving machine learning models
+keywords:
+- tensorflow
+- serving
+- inception
+- machine
+- learning
+- library
+home: https://tensorflow.github.io/serving/
+icon: https://bitnami.com/assets/stacks/tensorflow-inception/img/tensorflow-inception-stack-220x234.png
+sources:
+- https://github.com/bitnami/bitnami-docker-tensorflow-serving
+- https://github.com/bitnami/bitnami-docker-tensorflow-inception
+maintainers:
+- email: containers@bitnami.com
+  name: Bitnami
+engine: gotpl

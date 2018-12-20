@@ -1,6 +1,6 @@
 #!/bin/bash
 
-gestalt_cli_version=0.10.5
+gestalt_cli_version=0.10.6
 
 exit_with_error() {
   echo "[Error] $@"
@@ -40,4 +40,6 @@ if [ ! -f './bin/fog' ]; then
 
         rm fog.zip
     fi
+else
+  echo "Fog CLI already present. Version: $(./bin/fog --version). To download $gestalt_cli_version version CLI, remove it: 'rm ./bin/fog'"
 fi

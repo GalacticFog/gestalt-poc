@@ -1,0 +1,5 @@
+name: 'Example VM'
+
+version: '1.0'
+
+description: 'This is an example VM'

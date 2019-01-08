@@ -1,17 +1,5 @@
 {
-  "context": {
-    "org": {
-      "fqon": "training"
-    },
-    "workspace": {
-      "id": "ee124766-ec97-4e98-bd5e-d4f25d418d06",
-      "name": "demo"
-    },
-    "environment": {
-      "id": "9ae9ca75-5119-46ab-9a85-598f7644ce18",
-      "name": "async_lambdas"
-    }
-  },
+  "context": {},
   "config": {
     "laser_url": "lsr.a8b52224-11d8-443a-a419-e1682e4c09dc.marathon.l4lb.thisdcos.directory",
     "laser_provider": "/root/laser",
@@ -22,9 +10,9 @@
     "_": [
       "apply"
     ],
-    "d": "tmp/gestalt-poc/Training/Setup/lambda_chaining",
-    "directory": "tmp/gestalt-poc/Training/Setup/lambda_chaining",
-    "config": "tmp/gestalt-poc/Training/Setup/config.yaml",
+    "d": "deps/gestalt-poc/Training/Setup/lambda_chaining",
+    "directory": "deps/gestalt-poc/Training/Setup/lambda_chaining",
+    "config": "deps/gestalt-poc/Training/Setup/config.yaml",
     "render-bundle": true,
     "renderBundle": true,
     "$0": "/Users/ericgf/Workspace/gestalt-fog-cli/cli/bin/fog"

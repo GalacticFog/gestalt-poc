@@ -131,3 +131,4 @@ Create name for the tiller-proxy based on the fullname
 {{- define "kubeapps.tiller-proxy.fullname" -}}
 {{ template "kubeapps.fullname" . }}-internal-tiller-proxy
 {{- end -}}
+

@@ -1,0 +1,9 @@
+deploy:
+  url: http://localhost:31113/catalog-deploy/bundle
+  method: POST
+  headers:
+    'Content-Type': 'application/json'
+
+payload:
+  type: 'json'
+  render: 'none'

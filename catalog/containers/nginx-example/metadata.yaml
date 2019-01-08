@@ -3,14 +3,3 @@ name: 'NGINX Example'
 version: '1.0'
 
 description: 'This is an example nginx container for Gestalt Platform'
-
-# If 'deploy' doesn't exist, the catalog item shouldn't be considered deployable
-deploy:
-  url: http://localhost:31113/catalog-deploy/bundle
-  method: POST
-  headers:
-    'Content-Type': 'application/json'
-
-payload:
-  type: 'json'
-  render: 'none'

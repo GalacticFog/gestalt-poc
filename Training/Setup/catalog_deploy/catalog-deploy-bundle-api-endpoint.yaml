@@ -8,6 +8,7 @@ properties:
   - PUT
   - POST
   - DELETE
+  - OPTIONS
   plugins:
     rateLimit:
       enabled: false

@@ -1,0 +1,5 @@
+resource_type: 'Gestalt::Resource::Workspace'
+name: 'demo'
+description: 'Demo Workspace'
+properties: {}
+contextPath: '/#{Config org}'

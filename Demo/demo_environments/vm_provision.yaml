@@ -1,0 +1,5 @@
+resource_type: 'Gestalt::Resource::Environment'
+name: vm_provision
+description: IaC VM Provisioning
+properties:
+  environment_type: production

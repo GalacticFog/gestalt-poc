@@ -1,0 +1,5 @@
+resource_type: 'Gestalt::Resource::Environment'
+name: url_redirect
+description: URL Redirection Service
+properties:
+  environment_type: production

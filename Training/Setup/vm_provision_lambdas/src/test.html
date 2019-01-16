@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title>${process.env.TITLE || 'Request to Provision new VM'}</title>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    </head>
+    <body class="bg-light">
+        <div class="container">
+                <div class="row" style="margin:100px;">
+                    <form id="form1"  method="POST">
+                        <h2>TITLE</h2>
+                        <input id="hosting_environment" name="hosting_environment" type="text" placeholder="Hosting Environment" class="form-control"  style="margin-bottom:16px; min-width:150px;"></input>
+                        <input id="region" name="region" type="text" placeholder="Region" class="form-control"  style="margin-bottom:16px; min-width:150px;"></input>
+                        <input id="repo" name="repo" type="text" placeholder="Repository" class="form-control"  style="margin-bottom:16px; min-width:150px;"></input>
+                        <input id="branch" name="branch" type="text" placeholder="Branch" class="form-control"  style="margin-bottom:16px; min-width:150px;"></input>
+                        <input id="vm_size" name="vm_size" type="text" placeholder="VM Size" class="form-control"  style="margin-bottom:16px; min-width:150px;"></input>
+
+                        <div class="radio">
+                            <label><input type="radio" name="os_type" value="RHEL7" checked>RHEL 7.x</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="os_type" value="Windows2016">Windows 2016</label>
+                        </div>
+
+                        <label class="checkbox-inline"><input name="nas_enabled" type="checkbox" value="">NAS enabled</label>
+
+                        <input id="nas_size" name="nas_size" type="number" placeholder="NAS Size (GiB)" class="form-control"  style="margin-bottom:16px; min-width:150px;"></input>
+
+                        <textarea id="user_data" name="user_data" placeholder="User Data" autofocus="autofocus" onfocus="messageFocused()" class="form-control" style="margin-bottom:16px; min-width:150px;"></textarea>
+
+                        <input id="token" name="token" type="hidden" value="${token}">
+
+                        <button type="submit" method="POST">Submit</button>
+                    </form>
+
+                    <!-- <button onclick="sendClick()" class="btn btn-primary" style="width:200px;">Initiate VM Provisioning</button> -->
+
+                    <div id="status" style="margin-left:32px;"></div>
+                </div>
+        </div>
+    </body>
+    </html>   

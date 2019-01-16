@@ -1,0 +1,30 @@
+resource_type: Gestalt::Resource::Node::Lambda
+name: vm-provision-lambda
+description: 'Provides a form to provision a lambda'
+properties:
+  apiendpoints: []
+  provider:
+    id: '#{Provider #{Config laser_provider}}'
+    locations: []
+  secrets: []
+  public: true
+  pre_warm: 0
+  code: '#{LambdaSource src/vm-provision.js}'
+  cpus: 0.1
+  code_type: code
+  headers:
+    Accept: text/plain
+    Content-Type: text/html
+  periodic_info: {}
+  timeout: 60
+  handler: handler
+  runtime: nodejs
+  env:
+    DOWNSTREAM_HTTP_METHOD: 'POST'
+    DOWNSTREAM_URL: 'http://myjenkinsserver:8080/RunBuild'
+    JOB: 'job'
+    CLOUD_OPTIONS: 'AWS,Azure,Google'
+    TOKEN: DummyToken
+    # LOGO_IMAGE
+    
+  memory: 128

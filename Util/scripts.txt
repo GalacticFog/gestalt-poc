@@ -1,0 +1,85 @@
+
+apply-training-org-and-workspaces-entitlements-for-all-users.sh
+for u in `cat all-users.txt`; do ./apply-training-org-and-workspaces-entitlements-for-user.sh $u ; done
+
+
+###################
+apply-training-org-and-workspaces-entitlements-for-user.sh
+#!/bin/bash
+
+set -e
+
+user=$1
+
+# Training org / workspace / environments
+fog admin apply-entitlements --user $user -f entitlements/readonly-org.yaml /root
+fog admin apply-entitlements --user $user -f entitlements/readonly-org.yaml /training
+fog admin apply-entitlements --user $user -f entitlements/readonly-workspace.yaml /training/demo
+fog admin apply-entitlements --user $user -f entitlements/readonly-environment.yaml /training/demo/lambda_chaining
+fog admin apply-entitlements --user $user -f entitlements/readonly-environment.yaml /training/demo/lambda_demo
+fog admin apply-entitlements --user $user -f entitlements/readonly-environment.yaml /training/demo/async_lambdas
+fog admin apply-entitlements --user $user -f entitlements/readonly-environment.yaml /training/demo/periodic_lambdas
+fog admin apply-entitlements --user $user -f entitlements/readonly-environment.yaml /training/demo/ui_lambdas
+
+###################
+apply-user-workspace.sh
+#!/bin/bash
+
+set -e
+
+user=$1
+
+echo "Creating workspace for $i"
+
+fog apply -d student_workspace --params user=$user user_lowercase=${user,,}
+fog apply -d student_workspace/env --context /training/${user,,}/local
+
+# fog apply -d student_workspace --params user=$user user_lowercase=${user}
+# fog apply -d student_workspace/env --context /training/${user}/local
+###################
+apply-workspace-entitlements-for-all-users.sh
+for u in `cat all-users.txt`; do ./set-user-workspace-entitlements.sh $u ; done
+###################
+reapply-entitlements-for-user.sh
+
+set -e
+
+user=$1
+
+./user-search.sh $user
+
+fog meta POST /sync
+
+./apply-user-entitlements.sh $user
+###################
+reapply.sh
+for u in `cat all-users.txt`; do ./reapply-entitlements-for-user.sh $u | tee -a results.txt ; done
+###################
+setup-user.sh
+
+set -e
+
+user=$1
+
+./user-search.sh $user
+
+fog meta POST /sync
+
+./apply-user-workspace.sh $user
+./apply-user-entitlements.sh $user
+###################
+set-user-workspace-entitlements.sh
+#!/bin/bash -x
+
+set -e
+
+user=$1
+
+# User
+fog admin apply-entitlements --user $user -f entitlements/readonly-workspace.yaml /training/${user,,}
+fog admin apply-entitlements --user $user -f entitlements/developer-dev-environment.yaml /training/${user,,}/local
+###################
+user-search.sh
+#!/bin/bash -x
+fog security GET /directories/37dd46a1-3942-4f14-b5c7-369e09173c66/accounts?username=$1
+###################

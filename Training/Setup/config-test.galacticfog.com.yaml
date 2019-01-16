@@ -1,0 +1,4 @@
+laser_url: 'lsr.a8b52224-11d8-443a-a419-e1682e4c09dc.marathon.l4lb.thisdcos.directory'
+laser_provider: /root/laser
+gwm_provider: /root/gwm
+kong_provider: /root/kong

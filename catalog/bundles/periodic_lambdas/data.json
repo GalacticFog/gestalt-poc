@@ -1,0 +1,56 @@
+{
+  "context": {},
+  "config": {
+    "laser_url": "lsr.322bdf3f-31d8-4b40-8807-813ac50dae9e.svc.cluster.local",
+    "laser_provider": "/root/default-laser",
+    "gwm_provider": "/root/default-gwm",
+    "kong_provider": "/root/default-kong"
+  },
+  "options": {
+    "_": [
+      "apply"
+    ],
+    "d": "deps/gestalt-poc/Demo/periodic_lambdas",
+    "directory": "deps/gestalt-poc/Demo/periodic_lambdas",
+    "config": "deps/gestalt-poc/config.yaml",
+    "render-bundle": true,
+    "renderBundle": true,
+    "$0": "/Users/ericgf/Workspace/gestalt-fog-cli/cli/bin/fog"
+  },
+  "resources": [
+    {
+      "name": "periodic-lambda1",
+      "resource_type": "Gestalt::Resource::Node::Lambda",
+      "description": "Periodic Lambda example",
+      "properties": {
+        "apiendpoints": [],
+        "provider": {
+          "id": "#{Provider #{Config laser_provider}}",
+          "locations": []
+        },
+        "secrets": [],
+        "public": true,
+        "pre_warm": 0,
+        "code": "Y29uc3QgcmVxdWVzdCA9IHJlcXVpcmUoJ3JlcXVlc3QtcHJvbWlzZS1uYXRpdmUnKTsKCm1vZHVsZS5leHBvcnRzLmhhbmRsZXIgPSBhc3luYyAoZXZlbnQsIGNvbnRleHQsIGNhbGxiYWNrKSA9PiB7CgogICAgY29uc3QgZGF0YSA9IHsKICAgICAgICBldmVudDogSlNPTi5wYXJzZShldmVudCksCiAgICAgICAgY29udGV4dDogSlNPTi5wYXJzZShjb250ZXh0KQogICAgfQoKCiAgICAvLyBjb25zdCByZXNwb25zZSA9IHsKICAgIC8vICAgICBzdGF0dXNDb2RlOiAyMDEsCiAgICAvLyAgICAgaGVhZGVyczoge30sCiAgICAvLyAgICAgYm9keTogSlNPTi5zdHJpbmdpZnkoZGF0YSkKICAgIC8vIH0KCiAgICBjYWxsYmFjayhudWxsLCBkYXRhKTsKfTs=",
+        "cpus": 0.1,
+        "code_type": "code",
+        "headers": {
+          "Accept": "text/plain",
+          "Content-Type": "text/plain"
+        },
+        "periodic_info": {
+          "timezone": "America/New_York",
+          "schedule": "R10/2018-01-01T00:00:00.000Z/PT1S",
+          "payload": {
+            "data": "ewogICAgIm9uZSI6IDEsCiAgICAidHdvIjogMgp9",
+            "eventName": "staticEvent"
+          }
+        },
+        "timeout": 60,
+        "handler": "handler",
+        "runtime": "nodejs",
+        "memory": 128
+      }
+    }
+  ]
+}

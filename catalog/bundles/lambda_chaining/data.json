@@ -1,0 +1,402 @@
+{
+  "context": {},
+  "config": {
+    "laser_url": "lsr.322bdf3f-31d8-4b40-8807-813ac50dae9e.svc.cluster.local",
+    "laser_provider": "/root/default-laser",
+    "gwm_provider": "/root/default-gwm",
+    "kong_provider": "/root/default-kong"
+  },
+  "options": {
+    "_": [
+      "apply"
+    ],
+    "d": "deps/gestalt-poc/Demo/lambda_chaining",
+    "directory": "deps/gestalt-poc/Demo/lambda_chaining",
+    "config": "deps/gestalt-poc/config.yaml",
+    "render-bundle": true,
+    "renderBundle": true,
+    "$0": "/Users/ericgf/Workspace/gestalt-fog-cli/cli/bin/fog"
+  },
+  "resources": [
+    {
+      "resource_type": "Gestalt::Resource::ApiEndpoint",
+      "name": "/one",
+      "description": "Laser results service",
+      "properties": {
+        "resource": "/one",
+        "methods": [
+          "GET",
+          "PUT",
+          "POST",
+          "DELETE"
+        ],
+        "plugins": {
+          "rateLimit": {
+            "enabled": false,
+            "perMinute": 60
+          },
+          "gestaltSecurity": {
+            "enabled": false,
+            "users": [],
+            "groups": []
+          }
+        },
+        "synchronous": true,
+        "is_http_aware": true,
+        "implementation_type": "lambda",
+        "implementation_id": "#{Lambda controller}"
+      },
+      "context": {
+        "api": {
+          "id": "#{Api #{Config api}}"
+        }
+      }
+    },
+    {
+      "resource_type": "Gestalt::Resource::Node::Lambda",
+      "name": "child-lambda-1",
+      "description": "Demo of lambda chaining",
+      "properties": {
+        "apiendpoints": [],
+        "provider": {
+          "id": "#{Provider #{Config laser_provider}}",
+          "locations": []
+        },
+        "secrets": [],
+        "public": true,
+        "pre_warm": 0,
+        "code": "Y29uc3QgcmVxdWVzdCA9IHJlcXVpcmUoJ3JlcXVlc3QtcHJvbWlzZS1uYXRpdmUnKTsKCm1vZHVsZS5leHBvcnRzLmhhbmRsZXIgPSBhc3luYyAoZXZlbnQsIGNvbnRleHQsIGNhbGxiYWNrKSA9PiB7CgogICAgY29uc29sZS5sb2coJ0V2ZW50OiAnICsgZXZlbnQpOwogICAgY29uc29sZS5sb2coJ0NvbnRleHQ6ICcgKyBjb250ZXh0KTsKCiAgICBldmVudCA9IChldmVudCAmJiBldmVudC5sZW5ndGggPiAwKSA/IEpTT04ucGFyc2UoZXZlbnQpIDoge307CiAgICBjb250ZXh0ID0gSlNPTi5wYXJzZShjb250ZXh0KTsKCiAgICAvLyBIZWFkZXJzIGhhdmUgdG8gYmUgc3RyaW5ncwogICAgY29uc3Qgc3RlcCA9IHBhcnNlSW50KGNvbnRleHQuaGVhZGVycy5zdGVwKTsKCiAgICAvLyBBcHBlbmQgdG8gdGhlIGJvZHkKICAgIGNvbnN0IGJvZHkgPSBldmVudC5ib2R5ID8gSlNPTi5wYXJzZShldmVudC5ib2R5KSA6IHt9OwoKICAgIGNvbnNvbGUubG9nKCdib2R5OiAnICsgSlNPTi5zdHJpbmdpZnkoYm9keSkpOwoKICAgIGJvZHlbYFN0ZXAgJHtzdGVwfWBdID0gYFRoaXMgaXMgJHtzdGVwfWA7CgogICAgY29uc29sZS5sb2coJ2JvZHk6ICcgKyBKU09OLnN0cmluZ2lmeShib2R5KSk7CgogICAgY29uc3QgdGltZW91dCA9IG1zID0+IG5ldyBQcm9taXNlKHJlcyA9PiBzZXRUaW1lb3V0KHJlcywgbXMpKQoKICAgIGNvbnNvbGUubG9nKCJXYWl0aW5nIGEgdGltZS4uLiIpCgogICAgYXdhaXQgdGltZW91dCgyMDApOwoKICAgIGNvbnN0IGhlYWRlcnMgPSB7fTsKICAgIGhlYWRlcnNbYHN0ZXAtJHtzdGVwfWBdID0gYDIwMCBTdWNjZXNzYAoKICAgIGNvbnN0IHJlc3BvbnNlID0gewogICAgICAgIHN0YXR1c0NvZGU6IDIwMSwKICAgICAgICBoZWFkZXJzOiBoZWFkZXJzLAogICAgICAgIGJvZHk6IEpTT04uc3RyaW5naWZ5KGJvZHkpCiAgICB9CgogICAgY2FsbGJhY2sobnVsbCwgcmVzcG9uc2UpOwp9Owo=",
+        "cpus": 0.1,
+        "code_type": "code",
+        "headers": {
+          "Accept": "text/plain",
+          "Content-Type": "text/plain"
+        },
+        "periodic_info": {},
+        "timeout": 60,
+        "handler": "handler",
+        "runtime": "nodejs",
+        "env": {
+          "TEST1": "Test 1 value"
+        },
+        "memory": 128
+      }
+    },
+    {
+      "resource_type": "Gestalt::Resource::Node::Lambda",
+      "name": "child-lambda-10",
+      "description": "Demo of lambda chaining",
+      "properties": {
+        "apiendpoints": [],
+        "provider": {
+          "id": "#{Provider #{Config laser_provider}}",
+          "locations": []
+        },
+        "secrets": [],
+        "public": true,
+        "pre_warm": 0,
+        "code": "Y29uc3QgcmVxdWVzdCA9IHJlcXVpcmUoJ3JlcXVlc3QtcHJvbWlzZS1uYXRpdmUnKTsKCm1vZHVsZS5leHBvcnRzLmhhbmRsZXIgPSBhc3luYyAoZXZlbnQsIGNvbnRleHQsIGNhbGxiYWNrKSA9PiB7CgogICAgY29uc29sZS5sb2coJ0V2ZW50OiAnICsgZXZlbnQpOwogICAgY29uc29sZS5sb2coJ0NvbnRleHQ6ICcgKyBjb250ZXh0KTsKCiAgICBldmVudCA9IChldmVudCAmJiBldmVudC5sZW5ndGggPiAwKSA/IEpTT04ucGFyc2UoZXZlbnQpIDoge307CiAgICBjb250ZXh0ID0gSlNPTi5wYXJzZShjb250ZXh0KTsKCiAgICAvLyBIZWFkZXJzIGhhdmUgdG8gYmUgc3RyaW5ncwogICAgY29uc3Qgc3RlcCA9IHBhcnNlSW50KGNvbnRleHQuaGVhZGVycy5zdGVwKTsKCiAgICAvLyBBcHBlbmQgdG8gdGhlIGJvZHkKICAgIGNvbnN0IGJvZHkgPSBldmVudC5ib2R5ID8gSlNPTi5wYXJzZShldmVudC5ib2R5KSA6IHt9OwoKICAgIGNvbnNvbGUubG9nKCdib2R5OiAnICsgSlNPTi5zdHJpbmdpZnkoYm9keSkpOwoKICAgIGJvZHlbYFN0ZXAgJHtzdGVwfWBdID0gYFRoaXMgaXMgJHtzdGVwfWA7CgogICAgY29uc29sZS5sb2coJ2JvZHk6ICcgKyBKU09OLnN0cmluZ2lmeShib2R5KSk7CgogICAgY29uc3QgdGltZW91dCA9IG1zID0+IG5ldyBQcm9taXNlKHJlcyA9PiBzZXRUaW1lb3V0KHJlcywgbXMpKQoKICAgIGNvbnNvbGUubG9nKCJXYWl0aW5nIGEgdGltZS4uLiIpCgogICAgYXdhaXQgdGltZW91dCgyMDApOwoKICAgIGNvbnN0IGhlYWRlcnMgPSB7fTsKICAgIGhlYWRlcnNbYHN0ZXAtJHtzdGVwfWBdID0gYDIwMCBTdWNjZXNzYAoKICAgIGNvbnN0IHJlc3BvbnNlID0gewogICAgICAgIHN0YXR1c0NvZGU6IDIwMSwKICAgICAgICBoZWFkZXJzOiBoZWFkZXJzLAogICAgICAgIGJvZHk6IEpTT04uc3RyaW5naWZ5KGJvZHkpCiAgICB9CgogICAgY2FsbGJhY2sobnVsbCwgcmVzcG9uc2UpOwp9Owo=",
+        "cpus": 0.1,
+        "code_type": "code",
+        "headers": {
+          "Accept": "text/plain",
+          "Content-Type": "text/plain"
+        },
+        "periodic_info": {},
+        "timeout": 60,
+        "handler": "handler",
+        "runtime": "nodejs",
+        "env": {
+          "TEST1": "Test 1 value"
+        },
+        "memory": 128
+      }
+    },
+    {
+      "resource_type": "Gestalt::Resource::Node::Lambda",
+      "name": "child-lambda-2",
+      "description": "Demo of lambda chaining",
+      "properties": {
+        "apiendpoints": [],
+        "provider": {
+          "id": "#{Provider #{Config laser_provider}}",
+          "locations": []
+        },
+        "secrets": [],
+        "public": true,
+        "pre_warm": 0,
+        "code": "Y29uc3QgcmVxdWVzdCA9IHJlcXVpcmUoJ3JlcXVlc3QtcHJvbWlzZS1uYXRpdmUnKTsKCm1vZHVsZS5leHBvcnRzLmhhbmRsZXIgPSBhc3luYyAoZXZlbnQsIGNvbnRleHQsIGNhbGxiYWNrKSA9PiB7CgogICAgY29uc29sZS5sb2coJ0V2ZW50OiAnICsgZXZlbnQpOwogICAgY29uc29sZS5sb2coJ0NvbnRleHQ6ICcgKyBjb250ZXh0KTsKCiAgICBldmVudCA9IChldmVudCAmJiBldmVudC5sZW5ndGggPiAwKSA/IEpTT04ucGFyc2UoZXZlbnQpIDoge307CiAgICBjb250ZXh0ID0gSlNPTi5wYXJzZShjb250ZXh0KTsKCiAgICAvLyBIZWFkZXJzIGhhdmUgdG8gYmUgc3RyaW5ncwogICAgY29uc3Qgc3RlcCA9IHBhcnNlSW50KGNvbnRleHQuaGVhZGVycy5zdGVwKTsKCiAgICAvLyBBcHBlbmQgdG8gdGhlIGJvZHkKICAgIGNvbnN0IGJvZHkgPSBldmVudC5ib2R5ID8gSlNPTi5wYXJzZShldmVudC5ib2R5KSA6IHt9OwoKICAgIGNvbnNvbGUubG9nKCdib2R5OiAnICsgSlNPTi5zdHJpbmdpZnkoYm9keSkpOwoKICAgIGJvZHlbYFN0ZXAgJHtzdGVwfWBdID0gYFRoaXMgaXMgJHtzdGVwfWA7CgogICAgY29uc29sZS5sb2coJ2JvZHk6ICcgKyBKU09OLnN0cmluZ2lmeShib2R5KSk7CgogICAgY29uc3QgdGltZW91dCA9IG1zID0+IG5ldyBQcm9taXNlKHJlcyA9PiBzZXRUaW1lb3V0KHJlcywgbXMpKQoKICAgIGNvbnNvbGUubG9nKCJXYWl0aW5nIGEgdGltZS4uLiIpCgogICAgYXdhaXQgdGltZW91dCgyMDApOwoKICAgIGNvbnN0IGhlYWRlcnMgPSB7fTsKICAgIGhlYWRlcnNbYHN0ZXAtJHtzdGVwfWBdID0gYDIwMCBTdWNjZXNzYAoKICAgIGNvbnN0IHJlc3BvbnNlID0gewogICAgICAgIHN0YXR1c0NvZGU6IDIwMSwKICAgICAgICBoZWFkZXJzOiBoZWFkZXJzLAogICAgICAgIGJvZHk6IEpTT04uc3RyaW5naWZ5KGJvZHkpCiAgICB9CgogICAgY2FsbGJhY2sobnVsbCwgcmVzcG9uc2UpOwp9Owo=",
+        "cpus": 0.1,
+        "code_type": "code",
+        "headers": {
+          "Accept": "text/plain",
+          "Content-Type": "text/plain"
+        },
+        "periodic_info": {},
+        "timeout": 60,
+        "handler": "handler",
+        "runtime": "nodejs",
+        "env": {
+          "TEST1": "Test 1 value"
+        },
+        "memory": 128
+      }
+    },
+    {
+      "resource_type": "Gestalt::Resource::Node::Lambda",
+      "name": "child-lambda-3",
+      "description": "Demo of lambda chaining",
+      "properties": {
+        "apiendpoints": [],
+        "provider": {
+          "id": "#{Provider #{Config laser_provider}}",
+          "locations": []
+        },
+        "secrets": [],
+        "public": true,
+        "pre_warm": 0,
+        "code": "Y29uc3QgcmVxdWVzdCA9IHJlcXVpcmUoJ3JlcXVlc3QtcHJvbWlzZS1uYXRpdmUnKTsKCm1vZHVsZS5leHBvcnRzLmhhbmRsZXIgPSBhc3luYyAoZXZlbnQsIGNvbnRleHQsIGNhbGxiYWNrKSA9PiB7CgogICAgY29uc29sZS5sb2coJ0V2ZW50OiAnICsgZXZlbnQpOwogICAgY29uc29sZS5sb2coJ0NvbnRleHQ6ICcgKyBjb250ZXh0KTsKCiAgICBldmVudCA9IChldmVudCAmJiBldmVudC5sZW5ndGggPiAwKSA/IEpTT04ucGFyc2UoZXZlbnQpIDoge307CiAgICBjb250ZXh0ID0gSlNPTi5wYXJzZShjb250ZXh0KTsKCiAgICAvLyBIZWFkZXJzIGhhdmUgdG8gYmUgc3RyaW5ncwogICAgY29uc3Qgc3RlcCA9IHBhcnNlSW50KGNvbnRleHQuaGVhZGVycy5zdGVwKTsKCiAgICAvLyBBcHBlbmQgdG8gdGhlIGJvZHkKICAgIGNvbnN0IGJvZHkgPSBldmVudC5ib2R5ID8gSlNPTi5wYXJzZShldmVudC5ib2R5KSA6IHt9OwoKICAgIGNvbnNvbGUubG9nKCdib2R5OiAnICsgSlNPTi5zdHJpbmdpZnkoYm9keSkpOwoKICAgIGJvZHlbYFN0ZXAgJHtzdGVwfWBdID0gYFRoaXMgaXMgJHtzdGVwfWA7CgogICAgY29uc29sZS5sb2coJ2JvZHk6ICcgKyBKU09OLnN0cmluZ2lmeShib2R5KSk7CgogICAgY29uc3QgdGltZW91dCA9IG1zID0+IG5ldyBQcm9taXNlKHJlcyA9PiBzZXRUaW1lb3V0KHJlcywgbXMpKQoKICAgIGNvbnNvbGUubG9nKCJXYWl0aW5nIGEgdGltZS4uLiIpCgogICAgYXdhaXQgdGltZW91dCgyMDApOwoKICAgIGNvbnN0IGhlYWRlcnMgPSB7fTsKICAgIGhlYWRlcnNbYHN0ZXAtJHtzdGVwfWBdID0gYDIwMCBTdWNjZXNzYAoKICAgIGNvbnN0IHJlc3BvbnNlID0gewogICAgICAgIHN0YXR1c0NvZGU6IDIwMSwKICAgICAgICBoZWFkZXJzOiBoZWFkZXJzLAogICAgICAgIGJvZHk6IEpTT04uc3RyaW5naWZ5KGJvZHkpCiAgICB9CgogICAgY2FsbGJhY2sobnVsbCwgcmVzcG9uc2UpOwp9Owo=",
+        "cpus": 0.1,
+        "code_type": "code",
+        "headers": {
+          "Accept": "text/plain",
+          "Content-Type": "text/plain"
+        },
+        "periodic_info": {},
+        "timeout": 60,
+        "handler": "handler",
+        "runtime": "nodejs",
+        "env": {
+          "TEST1": "Test 1 value"
+        },
+        "memory": 128
+      }
+    },
+    {
+      "resource_type": "Gestalt::Resource::Node::Lambda",
+      "name": "child-lambda-4",
+      "description": "Demo of lambda chaining",
+      "properties": {
+        "apiendpoints": [],
+        "provider": {
+          "id": "#{Provider #{Config laser_provider}}",
+          "locations": []
+        },
+        "secrets": [],
+        "public": true,
+        "pre_warm": 0,
+        "code": "Y29uc3QgcmVxdWVzdCA9IHJlcXVpcmUoJ3JlcXVlc3QtcHJvbWlzZS1uYXRpdmUnKTsKCm1vZHVsZS5leHBvcnRzLmhhbmRsZXIgPSBhc3luYyAoZXZlbnQsIGNvbnRleHQsIGNhbGxiYWNrKSA9PiB7CgogICAgY29uc29sZS5sb2coJ0V2ZW50OiAnICsgZXZlbnQpOwogICAgY29uc29sZS5sb2coJ0NvbnRleHQ6ICcgKyBjb250ZXh0KTsKCiAgICBldmVudCA9IChldmVudCAmJiBldmVudC5sZW5ndGggPiAwKSA/IEpTT04ucGFyc2UoZXZlbnQpIDoge307CiAgICBjb250ZXh0ID0gSlNPTi5wYXJzZShjb250ZXh0KTsKCiAgICAvLyBIZWFkZXJzIGhhdmUgdG8gYmUgc3RyaW5ncwogICAgY29uc3Qgc3RlcCA9IHBhcnNlSW50KGNvbnRleHQuaGVhZGVycy5zdGVwKTsKCiAgICAvLyBBcHBlbmQgdG8gdGhlIGJvZHkKICAgIGNvbnN0IGJvZHkgPSBldmVudC5ib2R5ID8gSlNPTi5wYXJzZShldmVudC5ib2R5KSA6IHt9OwoKICAgIGNvbnNvbGUubG9nKCdib2R5OiAnICsgSlNPTi5zdHJpbmdpZnkoYm9keSkpOwoKICAgIGJvZHlbYFN0ZXAgJHtzdGVwfWBdID0gYFRoaXMgaXMgJHtzdGVwfWA7CgogICAgY29uc29sZS5sb2coJ2JvZHk6ICcgKyBKU09OLnN0cmluZ2lmeShib2R5KSk7CgogICAgY29uc3QgdGltZW91dCA9IG1zID0+IG5ldyBQcm9taXNlKHJlcyA9PiBzZXRUaW1lb3V0KHJlcywgbXMpKQoKICAgIGNvbnNvbGUubG9nKCJXYWl0aW5nIGEgdGltZS4uLiIpCgogICAgYXdhaXQgdGltZW91dCgyMDApOwoKICAgIGNvbnN0IGhlYWRlcnMgPSB7fTsKICAgIGhlYWRlcnNbYHN0ZXAtJHtzdGVwfWBdID0gYDIwMCBTdWNjZXNzYAoKICAgIGNvbnN0IHJlc3BvbnNlID0gewogICAgICAgIHN0YXR1c0NvZGU6IDIwMSwKICAgICAgICBoZWFkZXJzOiBoZWFkZXJzLAogICAgICAgIGJvZHk6IEpTT04uc3RyaW5naWZ5KGJvZHkpCiAgICB9CgogICAgY2FsbGJhY2sobnVsbCwgcmVzcG9uc2UpOwp9Owo=",
+        "cpus": 0.1,
+        "code_type": "code",
+        "headers": {
+          "Accept": "text/plain",
+          "Content-Type": "text/plain"
+        },
+        "periodic_info": {},
+        "timeout": 60,
+        "handler": "handler",
+        "runtime": "nodejs",
+        "env": {
+          "TEST1": "Test 1 value"
+        },
+        "memory": 128
+      }
+    },
+    {
+      "resource_type": "Gestalt::Resource::Node::Lambda",
+      "name": "child-lambda-5",
+      "description": "Demo of lambda chaining",
+      "properties": {
+        "apiendpoints": [],
+        "provider": {
+          "id": "#{Provider #{Config laser_provider}}",
+          "locations": []
+        },
+        "secrets": [],
+        "public": true,
+        "pre_warm": 0,
+        "code": "Y29uc3QgcmVxdWVzdCA9IHJlcXVpcmUoJ3JlcXVlc3QtcHJvbWlzZS1uYXRpdmUnKTsKCm1vZHVsZS5leHBvcnRzLmhhbmRsZXIgPSBhc3luYyAoZXZlbnQsIGNvbnRleHQsIGNhbGxiYWNrKSA9PiB7CgogICAgY29uc29sZS5sb2coJ0V2ZW50OiAnICsgZXZlbnQpOwogICAgY29uc29sZS5sb2coJ0NvbnRleHQ6ICcgKyBjb250ZXh0KTsKCiAgICBldmVudCA9IChldmVudCAmJiBldmVudC5sZW5ndGggPiAwKSA/IEpTT04ucGFyc2UoZXZlbnQpIDoge307CiAgICBjb250ZXh0ID0gSlNPTi5wYXJzZShjb250ZXh0KTsKCiAgICAvLyBIZWFkZXJzIGhhdmUgdG8gYmUgc3RyaW5ncwogICAgY29uc3Qgc3RlcCA9IHBhcnNlSW50KGNvbnRleHQuaGVhZGVycy5zdGVwKTsKCiAgICAvLyBBcHBlbmQgdG8gdGhlIGJvZHkKICAgIGNvbnN0IGJvZHkgPSBldmVudC5ib2R5ID8gSlNPTi5wYXJzZShldmVudC5ib2R5KSA6IHt9OwoKICAgIGNvbnNvbGUubG9nKCdib2R5OiAnICsgSlNPTi5zdHJpbmdpZnkoYm9keSkpOwoKICAgIGJvZHlbYFN0ZXAgJHtzdGVwfWBdID0gYFRoaXMgaXMgJHtzdGVwfWA7CgogICAgY29uc29sZS5sb2coJ2JvZHk6ICcgKyBKU09OLnN0cmluZ2lmeShib2R5KSk7CgogICAgY29uc3QgdGltZW91dCA9IG1zID0+IG5ldyBQcm9taXNlKHJlcyA9PiBzZXRUaW1lb3V0KHJlcywgbXMpKQoKICAgIGNvbnNvbGUubG9nKCJXYWl0aW5nIGEgdGltZS4uLiIpCgogICAgYXdhaXQgdGltZW91dCgyMDApOwoKICAgIGNvbnN0IGhlYWRlcnMgPSB7fTsKICAgIGhlYWRlcnNbYHN0ZXAtJHtzdGVwfWBdID0gYDIwMCBTdWNjZXNzYAoKICAgIGNvbnN0IHJlc3BvbnNlID0gewogICAgICAgIHN0YXR1c0NvZGU6IDIwMSwKICAgICAgICBoZWFkZXJzOiBoZWFkZXJzLAogICAgICAgIGJvZHk6IEpTT04uc3RyaW5naWZ5KGJvZHkpCiAgICB9CgogICAgY2FsbGJhY2sobnVsbCwgcmVzcG9uc2UpOwp9Owo=",
+        "cpus": 0.1,
+        "code_type": "code",
+        "headers": {
+          "Accept": "text/plain",
+          "Content-Type": "text/plain"
+        },
+        "periodic_info": {},
+        "timeout": 60,
+        "handler": "handler",
+        "runtime": "nodejs",
+        "env": {
+          "TEST1": "Test 1 value"
+        },
+        "memory": 128
+      }
+    },
+    {
+      "resource_type": "Gestalt::Resource::Node::Lambda",
+      "name": "child-lambda-6",
+      "description": "Demo of lambda chaining",
+      "properties": {
+        "apiendpoints": [],
+        "provider": {
+          "id": "#{Provider #{Config laser_provider}}",
+          "locations": []
+        },
+        "secrets": [],
+        "public": true,
+        "pre_warm": 0,
+        "code": "Y29uc3QgcmVxdWVzdCA9IHJlcXVpcmUoJ3JlcXVlc3QtcHJvbWlzZS1uYXRpdmUnKTsKCm1vZHVsZS5leHBvcnRzLmhhbmRsZXIgPSBhc3luYyAoZXZlbnQsIGNvbnRleHQsIGNhbGxiYWNrKSA9PiB7CgogICAgY29uc29sZS5sb2coJ0V2ZW50OiAnICsgZXZlbnQpOwogICAgY29uc29sZS5sb2coJ0NvbnRleHQ6ICcgKyBjb250ZXh0KTsKCiAgICBldmVudCA9IChldmVudCAmJiBldmVudC5sZW5ndGggPiAwKSA/IEpTT04ucGFyc2UoZXZlbnQpIDoge307CiAgICBjb250ZXh0ID0gSlNPTi5wYXJzZShjb250ZXh0KTsKCiAgICAvLyBIZWFkZXJzIGhhdmUgdG8gYmUgc3RyaW5ncwogICAgY29uc3Qgc3RlcCA9IHBhcnNlSW50KGNvbnRleHQuaGVhZGVycy5zdGVwKTsKCiAgICAvLyBBcHBlbmQgdG8gdGhlIGJvZHkKICAgIGNvbnN0IGJvZHkgPSBldmVudC5ib2R5ID8gSlNPTi5wYXJzZShldmVudC5ib2R5KSA6IHt9OwoKICAgIGNvbnNvbGUubG9nKCdib2R5OiAnICsgSlNPTi5zdHJpbmdpZnkoYm9keSkpOwoKICAgIGJvZHlbYFN0ZXAgJHtzdGVwfWBdID0gYFRoaXMgaXMgJHtzdGVwfWA7CgogICAgY29uc29sZS5sb2coJ2JvZHk6ICcgKyBKU09OLnN0cmluZ2lmeShib2R5KSk7CgogICAgY29uc3QgdGltZW91dCA9IG1zID0+IG5ldyBQcm9taXNlKHJlcyA9PiBzZXRUaW1lb3V0KHJlcywgbXMpKQoKICAgIGNvbnNvbGUubG9nKCJXYWl0aW5nIGEgdGltZS4uLiIpCgogICAgYXdhaXQgdGltZW91dCgyMDApOwoKICAgIGNvbnN0IGhlYWRlcnMgPSB7fTsKICAgIGhlYWRlcnNbYHN0ZXAtJHtzdGVwfWBdID0gYDIwMCBTdWNjZXNzYAoKICAgIGNvbnN0IHJlc3BvbnNlID0gewogICAgICAgIHN0YXR1c0NvZGU6IDIwMSwKICAgICAgICBoZWFkZXJzOiBoZWFkZXJzLAogICAgICAgIGJvZHk6IEpTT04uc3RyaW5naWZ5KGJvZHkpCiAgICB9CgogICAgY2FsbGJhY2sobnVsbCwgcmVzcG9uc2UpOwp9Owo=",
+        "cpus": 0.1,
+        "code_type": "code",
+        "headers": {
+          "Accept": "text/plain",
+          "Content-Type": "text/plain"
+        },
+        "periodic_info": {},
+        "timeout": 60,
+        "handler": "handler",
+        "runtime": "nodejs",
+        "env": {
+          "TEST1": "Test 1 value"
+        },
+        "memory": 128
+      }
+    },
+    {
+      "resource_type": "Gestalt::Resource::Node::Lambda",
+      "name": "child-lambda-7",
+      "description": "Demo of lambda chaining",
+      "properties": {
+        "apiendpoints": [],
+        "provider": {
+          "id": "#{Provider #{Config laser_provider}}",
+          "locations": []
+        },
+        "secrets": [],
+        "public": true,
+        "pre_warm": 0,
+        "code": "Y29uc3QgcmVxdWVzdCA9IHJlcXVpcmUoJ3JlcXVlc3QtcHJvbWlzZS1uYXRpdmUnKTsKCm1vZHVsZS5leHBvcnRzLmhhbmRsZXIgPSBhc3luYyAoZXZlbnQsIGNvbnRleHQsIGNhbGxiYWNrKSA9PiB7CgogICAgY29uc29sZS5sb2coJ0V2ZW50OiAnICsgZXZlbnQpOwogICAgY29uc29sZS5sb2coJ0NvbnRleHQ6ICcgKyBjb250ZXh0KTsKCiAgICBldmVudCA9IChldmVudCAmJiBldmVudC5sZW5ndGggPiAwKSA/IEpTT04ucGFyc2UoZXZlbnQpIDoge307CiAgICBjb250ZXh0ID0gSlNPTi5wYXJzZShjb250ZXh0KTsKCiAgICAvLyBIZWFkZXJzIGhhdmUgdG8gYmUgc3RyaW5ncwogICAgY29uc3Qgc3RlcCA9IHBhcnNlSW50KGNvbnRleHQuaGVhZGVycy5zdGVwKTsKCiAgICAvLyBBcHBlbmQgdG8gdGhlIGJvZHkKICAgIGNvbnN0IGJvZHkgPSBldmVudC5ib2R5ID8gSlNPTi5wYXJzZShldmVudC5ib2R5KSA6IHt9OwoKICAgIGNvbnNvbGUubG9nKCdib2R5OiAnICsgSlNPTi5zdHJpbmdpZnkoYm9keSkpOwoKICAgIGJvZHlbYFN0ZXAgJHtzdGVwfWBdID0gYFRoaXMgaXMgJHtzdGVwfWA7CgogICAgY29uc29sZS5sb2coJ2JvZHk6ICcgKyBKU09OLnN0cmluZ2lmeShib2R5KSk7CgogICAgY29uc3QgdGltZW91dCA9IG1zID0+IG5ldyBQcm9taXNlKHJlcyA9PiBzZXRUaW1lb3V0KHJlcywgbXMpKQoKICAgIGNvbnNvbGUubG9nKCJXYWl0aW5nIGEgdGltZS4uLiIpCgogICAgYXdhaXQgdGltZW91dCgyMDApOwoKICAgIGNvbnN0IGhlYWRlcnMgPSB7fTsKICAgIGhlYWRlcnNbYHN0ZXAtJHtzdGVwfWBdID0gYDIwMCBTdWNjZXNzYAoKICAgIGNvbnN0IHJlc3BvbnNlID0gewogICAgICAgIHN0YXR1c0NvZGU6IDIwMSwKICAgICAgICBoZWFkZXJzOiBoZWFkZXJzLAogICAgICAgIGJvZHk6IEpTT04uc3RyaW5naWZ5KGJvZHkpCiAgICB9CgogICAgY2FsbGJhY2sobnVsbCwgcmVzcG9uc2UpOwp9Owo=",
+        "cpus": 0.1,
+        "code_type": "code",
+        "headers": {
+          "Accept": "text/plain",
+          "Content-Type": "text/plain"
+        },
+        "periodic_info": {},
+        "timeout": 60,
+        "handler": "handler",
+        "runtime": "nodejs",
+        "env": {
+          "TEST1": "Test 1 value"
+        },
+        "memory": 128
+      }
+    },
+    {
+      "resource_type": "Gestalt::Resource::Node::Lambda",
+      "name": "child-lambda-8",
+      "description": "Demo of lambda chaining",
+      "properties": {
+        "apiendpoints": [],
+        "provider": {
+          "id": "#{Provider #{Config laser_provider}}",
+          "locations": []
+        },
+        "secrets": [],
+        "public": true,
+        "pre_warm": 0,
+        "code": "Y29uc3QgcmVxdWVzdCA9IHJlcXVpcmUoJ3JlcXVlc3QtcHJvbWlzZS1uYXRpdmUnKTsKCm1vZHVsZS5leHBvcnRzLmhhbmRsZXIgPSBhc3luYyAoZXZlbnQsIGNvbnRleHQsIGNhbGxiYWNrKSA9PiB7CgogICAgY29uc29sZS5sb2coJ0V2ZW50OiAnICsgZXZlbnQpOwogICAgY29uc29sZS5sb2coJ0NvbnRleHQ6ICcgKyBjb250ZXh0KTsKCiAgICBldmVudCA9IChldmVudCAmJiBldmVudC5sZW5ndGggPiAwKSA/IEpTT04ucGFyc2UoZXZlbnQpIDoge307CiAgICBjb250ZXh0ID0gSlNPTi5wYXJzZShjb250ZXh0KTsKCiAgICAvLyBIZWFkZXJzIGhhdmUgdG8gYmUgc3RyaW5ncwogICAgY29uc3Qgc3RlcCA9IHBhcnNlSW50KGNvbnRleHQuaGVhZGVycy5zdGVwKTsKCiAgICAvLyBBcHBlbmQgdG8gdGhlIGJvZHkKICAgIGNvbnN0IGJvZHkgPSBldmVudC5ib2R5ID8gSlNPTi5wYXJzZShldmVudC5ib2R5KSA6IHt9OwoKICAgIGNvbnNvbGUubG9nKCdib2R5OiAnICsgSlNPTi5zdHJpbmdpZnkoYm9keSkpOwoKICAgIGJvZHlbYFN0ZXAgJHtzdGVwfWBdID0gYFRoaXMgaXMgJHtzdGVwfWA7CgogICAgY29uc29sZS5sb2coJ2JvZHk6ICcgKyBKU09OLnN0cmluZ2lmeShib2R5KSk7CgogICAgY29uc3QgdGltZW91dCA9IG1zID0+IG5ldyBQcm9taXNlKHJlcyA9PiBzZXRUaW1lb3V0KHJlcywgbXMpKQoKICAgIGNvbnNvbGUubG9nKCJXYWl0aW5nIGEgdGltZS4uLiIpCgogICAgYXdhaXQgdGltZW91dCgyMDApOwoKICAgIGNvbnN0IGhlYWRlcnMgPSB7fTsKICAgIGhlYWRlcnNbYHN0ZXAtJHtzdGVwfWBdID0gYDIwMCBTdWNjZXNzYAoKICAgIGNvbnN0IHJlc3BvbnNlID0gewogICAgICAgIHN0YXR1c0NvZGU6IDIwMSwKICAgICAgICBoZWFkZXJzOiBoZWFkZXJzLAogICAgICAgIGJvZHk6IEpTT04uc3RyaW5naWZ5KGJvZHkpCiAgICB9CgogICAgY2FsbGJhY2sobnVsbCwgcmVzcG9uc2UpOwp9Owo=",
+        "cpus": 0.1,
+        "code_type": "code",
+        "headers": {
+          "Accept": "text/plain",
+          "Content-Type": "text/plain"
+        },
+        "periodic_info": {},
+        "timeout": 60,
+        "handler": "handler",
+        "runtime": "nodejs",
+        "env": {
+          "TEST1": "Test 1 value"
+        },
+        "memory": 128
+      }
+    },
+    {
+      "resource_type": "Gestalt::Resource::Node::Lambda",
+      "name": "child-lambda-9",
+      "description": "Demo of lambda chaining",
+      "properties": {
+        "apiendpoints": [],
+        "provider": {
+          "id": "#{Provider #{Config laser_provider}}",
+          "locations": []
+        },
+        "secrets": [],
+        "public": true,
+        "pre_warm": 0,
+        "code": "Y29uc3QgcmVxdWVzdCA9IHJlcXVpcmUoJ3JlcXVlc3QtcHJvbWlzZS1uYXRpdmUnKTsKCm1vZHVsZS5leHBvcnRzLmhhbmRsZXIgPSBhc3luYyAoZXZlbnQsIGNvbnRleHQsIGNhbGxiYWNrKSA9PiB7CgogICAgY29uc29sZS5sb2coJ0V2ZW50OiAnICsgZXZlbnQpOwogICAgY29uc29sZS5sb2coJ0NvbnRleHQ6ICcgKyBjb250ZXh0KTsKCiAgICBldmVudCA9IChldmVudCAmJiBldmVudC5sZW5ndGggPiAwKSA/IEpTT04ucGFyc2UoZXZlbnQpIDoge307CiAgICBjb250ZXh0ID0gSlNPTi5wYXJzZShjb250ZXh0KTsKCiAgICAvLyBIZWFkZXJzIGhhdmUgdG8gYmUgc3RyaW5ncwogICAgY29uc3Qgc3RlcCA9IHBhcnNlSW50KGNvbnRleHQuaGVhZGVycy5zdGVwKTsKCiAgICAvLyBBcHBlbmQgdG8gdGhlIGJvZHkKICAgIGNvbnN0IGJvZHkgPSBldmVudC5ib2R5ID8gSlNPTi5wYXJzZShldmVudC5ib2R5KSA6IHt9OwoKICAgIGNvbnNvbGUubG9nKCdib2R5OiAnICsgSlNPTi5zdHJpbmdpZnkoYm9keSkpOwoKICAgIGJvZHlbYFN0ZXAgJHtzdGVwfWBdID0gYFRoaXMgaXMgJHtzdGVwfWA7CgogICAgY29uc29sZS5sb2coJ2JvZHk6ICcgKyBKU09OLnN0cmluZ2lmeShib2R5KSk7CgogICAgY29uc3QgdGltZW91dCA9IG1zID0+IG5ldyBQcm9taXNlKHJlcyA9PiBzZXRUaW1lb3V0KHJlcywgbXMpKQoKICAgIGNvbnNvbGUubG9nKCJXYWl0aW5nIGEgdGltZS4uLiIpCgogICAgYXdhaXQgdGltZW91dCgyMDApOwoKICAgIGNvbnN0IGhlYWRlcnMgPSB7fTsKICAgIGhlYWRlcnNbYHN0ZXAtJHtzdGVwfWBdID0gYDIwMCBTdWNjZXNzYAoKICAgIGNvbnN0IHJlc3BvbnNlID0gewogICAgICAgIHN0YXR1c0NvZGU6IDIwMSwKICAgICAgICBoZWFkZXJzOiBoZWFkZXJzLAogICAgICAgIGJvZHk6IEpTT04uc3RyaW5naWZ5KGJvZHkpCiAgICB9CgogICAgY2FsbGJhY2sobnVsbCwgcmVzcG9uc2UpOwp9Owo=",
+        "cpus": 0.1,
+        "code_type": "code",
+        "headers": {
+          "Accept": "text/plain",
+          "Content-Type": "text/plain"
+        },
+        "periodic_info": {},
+        "timeout": 60,
+        "handler": "handler",
+        "runtime": "nodejs",
+        "env": {
+          "TEST1": "Test 1 value"
+        },
+        "memory": 128
+      }
+    },
+    {
+      "resource_type": "Gestalt::Resource::Api",
+      "name": "#{Config api}",
+      "description": "Lambda Chaining API",
+      "properties": {
+        "provider": {
+          "locations": [
+            "#{Provider #{Config kong_provider}}"
+          ],
+          "id": "#{Provider #{Config gwm_provider}}"
+        }
+      }
+    },
+    {
+      "resource_type": "Gestalt::Resource::Node::Lambda",
+      "name": "controller",
+      "description": "Demo of lambda chaining",
+      "properties": {
+        "apiendpoints": [],
+        "provider": {
+          "id": "#{Provider #{Config laser_provider}}",
+          "locations": []
+        },
+        "secrets": [],
+        "public": true,
+        "pre_warm": 0,
+        "code": "Y29uc3QgcmVxdWVzdCA9IHJlcXVpcmUoJ3JlcXVlc3QtcHJvbWlzZS1uYXRpdmUnKTsKCm1vZHVsZS5leHBvcnRzLmhhbmRsZXIgPSBhc3luYyAoZXZlbnQsIGNvbnRleHQsIGNhbGxiYWNrKSA9PiB7CgogICAgdHJ5IHsKCiAgICAgICAgY29uc29sZS5sb2coJ0V2ZW50OiAnICsgZXZlbnQpOwogICAgICAgIGNvbnNvbGUubG9nKCdDb250ZXh0OiAnICsgY29udGV4dCk7CgogICAgICAgIGNvbnRleHQgPSBKU09OLnBhcnNlKGNvbnRleHQpOwoKICAgICAgICBjb25zdCB1cmxzID0gW107CgogICAgICAgIGxldCBzZXJ2aWNlVXJsID0gcHJvY2Vzcy5lbnYuTEFTRVJfU0VSVklDRV9VUkw7CiAgICAgICAgaWYgKCFzZXJ2aWNlVXJsKSB0aHJvdyBFcnJvcihgTEFTRVJfU0VSVklDRV9VUkwgaXMgbm90IGRlZmluZWRgKTsKCiAgICAgICAgY29uc29sZS5sb2coYExBU0VSX1NFUlZJQ0VfVVJMID0gJHtzZXJ2aWNlVXJsfWApOwoKICAgICAgICBjb25zb2xlLmxvZyhgQ29sbGVjdGluZyBhbGwgbGFtYmRhIElEcyBmcm9tIGVudmlyb25tZW50Li4uYCk7CiAgICAgICAgbGV0IGkgPSAwOwogICAgICAgIHdoaWxlICh0cnVlKSB7CiAgICAgICAgICAgIGkrKzsKCiAgICAgICAgICAgIGNvbnN0IGxhbWJkYUlkID0gcHJvY2Vzcy5lbnZbYExBTUJEQV8ke2l9YF07CiAgICAgICAgICAgIGlmICghbGFtYmRhSWQpIGJyZWFrOwoKICAgICAgICAgICAgY29uc3QgdXJsID0gYCR7c2VydmljZVVybH0vbGFtYmRhcy8ke2xhbWJkYUlkfS9pbnZva2VTeW5jYDsKICAgICAgICAgICAgdXJscy5wdXNoKHVybCk7CgogICAgICAgICAgICBjb25zb2xlLmxvZyhgRm91bmQgTEFNQkRBXyR7aX06ICR7bGFtYmRhSWR9IC0tPiAke3VybH1gKTsKICAgICAgICB9CgogICAgICAgIGNvbnN0IHN1bW1hcnkgPSBbXTsKCiAgICAgICAgY29uc3Qgb3B0aW9ucyA9IHsKICAgICAgICAgICAgbWV0aG9kOiAnUE9TVCcsCiAgICAgICAgICAgIHJlc29sdmVXaXRoRnVsbFJlc3BvbnNlOiB0cnVlLAogICAgICAgICAgICBoZWFkZXJzOiBjb250ZXh0LmhlYWRlcnMgfHwge30sCiAgICAgICAgICAgIHRpbWVvdXQ6IDEwMDAwLAogICAgICAgICAgICBib2R5OiAnJwogICAgICAgIH0KCiAgICAgICAgbGV0IHN0ZXAgPSAwOwoKICAgICAgICBjb25zdCB0MCA9IERhdGUubm93KCk7CgogICAgICAgIGNvbnNvbGUubG9nKGBXaWxsIHByb2Nlc3MgJHt1cmxzLmxlbmd0aH0gdXJscy4uLmApOwogICAgICAgIGZvciAobGV0IHVybCBvZiB1cmxzKSB7CgogICAgICAgICAgICBjb25zdCBzdGFydCA9IERhdGUubm93KCk7CgogICAgICAgICAgICAvLyBTZXQgYW5kIGluY3JlbWVudCBzdGVwCiAgICAgICAgICAgIHN0ZXArKzsKICAgICAgICAgICAgb3B0aW9ucy5oZWFkZXJzID0gT2JqZWN0LmFzc2lnbihvcHRpb25zLmhlYWRlcnMsIHsgJ3N0ZXAnOiBTdHJpbmcoc3RlcCkgfSk7IC8vIE11c3QgYmUgc3RyaW5nCgogICAgICAgICAgICBjb25zb2xlLmxvZyhgSW52b2tpbmcgJHt1cmx9Li4uYCkKCiAgICAgICAgICAgIHRyeSB7CgogICAgICAgICAgICAgICAgY29uc3QgcmVzcCA9IGF3YWl0IHJlcXVlc3QoeyB1cmk6IHVybCwgLi4ub3B0aW9ucyB9KTsKCiAgICAgICAgICAgICAgICBjb25zdCBlbGFwc2VkID0gRGF0ZS5ub3coKSAtIHN0YXJ0OwoKICAgICAgICAgICAgICAgIGNvbnNvbGUubG9nKCdyZXNwLmJvZHk6ICcgKyByZXNwLmJvZHkpOwogICAgICAgICAgICAgICAgY29uc29sZS5sb2coJ3R5cGVvZiByZXNwLmJvZHk6ICcgKyAodHlwZW9mIHJlc3AuYm9keSkpOwogICAgICAgICAgICAgICAgY29uc29sZS5sb2coYCR7dXJsfSByZXR1cm5lZCBhICR7cmVzcC5zdGF0dXNDb2RlfSBhbmQgdG9vayAke2VsYXBzZWR9IG1zLi4uYCkKCiAgICAgICAgICAgICAgICBzdW1tYXJ5LnB1c2goewogICAgICAgICAgICAgICAgICAgIHN0ZXA6IHN0ZXAsCiAgICAgICAgICAgICAgICAgICAgdGltZXN0YW1wOiBzdGFydCwKICAgICAgICAgICAgICAgICAgICBlbGFwc2VkOiBlbGFwc2VkLAogICAgICAgICAgICAgICAgICAgIGRvd25zdHJlYW1fdXJsOiB1cmwsCiAgICAgICAgICAgICAgICAgICAgZG93bnN0cmVhbV9zdGF0dXNDb2RlOiByZXNwLnN0YXR1c0NvZGUsCiAgICAgICAgICAgICAgICAgICAgZG93bnN0cmVhbV9oZWFkZXJzOiByZXNwLmhlYWRlcnMsCiAgICAgICAgICAgICAgICAgICAgZG93bnN0cmVhbV9yZXNwb25zZTogSlNPTi5wYXJzZShyZXNwLmJvZHkpCiAgICAgICAgICAgICAgICB9KTsKCiAgICAgICAgICAgICAgICAvLyBDb2xsZWN0IGhlYWRlcnMKICAgICAgICAgICAgICAgIG9wdGlvbnMuaGVhZGVycyA9IE9iamVjdC5hc3NpZ24ob3B0aW9ucy5oZWFkZXJzLCBKU09OLnBhcnNlKHJlc3AuYm9keSkuaGVhZGVycyk7CiAgICAgICAgICAgICAgICBvcHRpb25zLmJvZHkgPSByZXNwLmJvZHk7IC8vIFVzZSByZXNwb25zZSBmcm9tIHRoaXMgY2FsbCBmb3IgdGhlIG5leHQgZG93bnN0cmVhbSBjYWxsCiAgICAgICAgICAgIH0gY2F0Y2ggKGVycikgewoKICAgICAgICAgICAgICAgIGNvbnNvbGUubG9nKGBFbm91bnRlcmVkIGFuIGVycm9yOiAke2Vyci5tZXNzYWdlfWApOwoKICAgICAgICAgICAgICAgIGNvbnN0IGVsYXBzZWQgPSBEYXRlLm5vdygpIC0gc3RhcnQ7CgogICAgICAgICAgICAgICAgc3VtbWFyeS5wdXNoKHsKICAgICAgICAgICAgICAgICAgICBzdGVwOiBzdGVwLAogICAgICAgICAgICAgICAgICAgIGVycm9yOiBlcnIubWVzc2FnZSwKICAgICAgICAgICAgICAgICAgICB0aW1lc3RhbXA6IHN0YXJ0LAogICAgICAgICAgICAgICAgICAgIGVsYXBzZWQ6IGVsYXBzZWQsCiAgICAgICAgICAgICAgICAgICAgZG93bnN0cmVhbV91cmw6IHVybCwKICAgICAgICAgICAgICAgIH0pOwogICAgICAgICAgICB9CiAgICAgICAgfQoKICAgICAgICBjb25zdCBlbGFwc2VkID0gRGF0ZS5ub3coKSAtIHQwOwoKICAgICAgICBjb25zb2xlLmxvZyhgV3JhcHBpbmcgdXAsIGdvdCAke3N1bW1hcnkubGVuZ3RofSByZXN1bHRzIGFmdGVyICR7ZWxhcHNlZH0gbXNgKTsKCiAgICAgICAgY29uc3QgYm9keSA9IHsKICAgICAgICAgICAgc3VtbWFyeTogc3VtbWFyeSwKICAgICAgICAgICAgZWxhcHNlZDogZWxhcHNlZAogICAgICAgIH07CgogICAgICAgIGNvbnN0IHJlc3BvbnNlID0gewogICAgICAgICAgICBzdGF0dXNDb2RlOiAyMDAsCiAgICAgICAgICAgIGhlYWRlcnM6IG9wdGlvbnMuaGVhZGVycywKICAgICAgICAgICAgYm9keTogSlNPTi5zdHJpbmdpZnkoYm9keSwgbnVsbCwgMikKICAgICAgICB9OwoKICAgICAgICBjYWxsYmFjayhudWxsLCByZXNwb25zZSk7CiAgICB9IGNhdGNoIChlcnIpIHsKCiAgICAgICAgY29uc29sZS5lcnJvcihgRW5jb3VudGVyZWQgZXJyb3I6ICR7ZXJyLm1lc3NhZ2V9YCk7CgogICAgICAgIGNvbnN0IHJlc3BvbnNlID0gewogICAgICAgICAgICBzdGF0dXNDb2RlOiA1MDAsCiAgICAgICAgICAgIGhlYWRlcnM6IHt9LAogICAgICAgICAgICBib2R5OiBlcnIuc3RhY2sKICAgICAgICB9CgogICAgICAgIGNhbGxiYWNrKG51bGwsIEpTT04uc3RyaW5naWZ5KHJlc3BvbnNlKSk7CiAgICB9Cn07Cg==",
+        "cpus": 0.1,
+        "code_type": "code",
+        "headers": {
+          "Accept": "text/plain",
+          "Content-Type": "text/plain"
+        },
+        "periodic_info": {},
+        "timeout": 600,
+        "handler": "handler",
+        "runtime": "nodejs",
+        "env": {
+          "LAMBDA_1": "#{Lambda child-lambda-1}",
+          "LAMBDA_2": "#{Lambda child-lambda-2}",
+          "LAMBDA_3": "#{Lambda child-lambda-3}",
+          "LASER_SERVICE_URL": "#{Config laser_url}"
+        },
+        "memory": 250
+      }
+    }
+  ]
+}

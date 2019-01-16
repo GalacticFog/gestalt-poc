@@ -1,7 +1,7 @@
 name: nginx
 version: 2.1.2
 appVersion: 1.14.2
-description: Chart for the nginx server
+description: Modified version of Helm chart - changed Deployment resource version to 'v1'
 keywords:
 - nginx
 - http

@@ -1,5 +1,5 @@
 {{- if include "ghost.host" . -}}
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "ghost.fullname" . }}
@@ -120,6 +120,10 @@ spec:
             secretKeyRef:
               name: {{ template "ghost.fullname" . }}
               key: smtp-password
+        {{- end }}
+        {{- if .Values.smtpFromAddress }}
+        - name: SMTP_FROM_ADDRESS
+          value: {{ .Values.smtpFromAddress | quote }}
         {{- end }}
         {{- if .Values.smtpService }}
         - name: SMTP_SERVICE

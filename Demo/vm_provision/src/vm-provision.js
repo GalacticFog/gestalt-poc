@@ -43,7 +43,7 @@ async function doPost(event) {
     delete event.requestId;
 
     const inputJson = JSON.stringify(event);
-    const body = `job=${job}&token=${token}&InputJson=${inputJson}`
+    const body = `job=${job}&token=${token}&InputJson=${inputJson}&ID=GF-${requestId}`
 
     console.log(`inputJson: ${inputJson}`);
     console.log(`body: ${body}`);

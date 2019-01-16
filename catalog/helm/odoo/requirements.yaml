@@ -1,4 +1,0 @@
-dependencies:
-- name: postgresql
-  version: 2.x.x
-  repository: https://kubernetes-charts.storage.googleapis.com/

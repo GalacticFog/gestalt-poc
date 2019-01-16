@@ -1,5 +1,5 @@
 description: ECS Provider
-name: defailt-ecs-provider
+name: default-ecs-provider
 properties:
   config:
     access_key: '#{Config ecs_access_key}'

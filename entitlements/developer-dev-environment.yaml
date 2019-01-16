@@ -5,8 +5,8 @@ actions:
 - actionprovider.delete
 - actionprovider.update
 - actionprovider.view
-- api.create
-- api.delete
+# - api.create
+# - api.delete
 - api.update
 - api.view
 - apiendpoint.create
@@ -14,12 +14,12 @@ actions:
 - apiendpoint.invoke
 - apiendpoint.update
 - apiendpoint.view
-- blueprint.create
-- blueprint.delete
-- blueprint.deploy
-- blueprint.import
-- blueprint.update
-- blueprint.view
+# - blueprint.create
+# - blueprint.delete
+# - blueprint.deploy
+# - blueprint.import
+# - blueprint.update
+# - blueprint.view
 - container.create
 - container.delete
 - container.import
@@ -37,21 +37,21 @@ actions:
 # - entitlement.update
 - entitlement.view
 - environment.create
-- environment.delete
+# - environment.delete
 - environment.update
 - environment.view
-- integration.create
-- integration.delete
-- integration.update
-- integration.view
+# - integration.create
+# - integration.delete
+# - integration.update
+# - integration.view
 - lambda.create
 - lambda.delete
 - lambda.invoke
 - lambda.update
 - lambda.view
-- policy.create
-- policy.delete
-- policy.update
+# - policy.create
+# - policy.delete
+# - policy.update
 - policy.view
 # - provider.create
 # - provider.delete

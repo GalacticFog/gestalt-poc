@@ -2,4 +2,4 @@ resource_type: 'Gestalt::Resource::Environment'
 name: ui_lambdas
 description: UI Lambdas
 properties:
-  environment_type: development
+  environment_type: test

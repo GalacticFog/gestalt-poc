@@ -1,0 +1,73 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+  labels:
+    gestalt-app: security
+  name: gestalt-security
+  namespace: gestalt-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      gestalt-app: security
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        gestalt-app: security
+    spec:
+      containers:
+      - env:
+        - name: DATABASE_HOSTNAME
+          value: gestalt-db.EXAMPLE.us-east-1.rds.amazonaws.com
+        - name: DATABASE_PORT
+          value: "5432"
+        - name: DATABASE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: db-username
+              name: gestalt-secrets
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: db-password
+              name: gestalt-secrets
+        - name: DATABASE_NAME
+          value: gestalt-security
+        - name: OAUTH_RATE_LIMITING_AMOUNT
+          value: "100"
+        - name: OAUTH_RATE_LIMITING_PERIOD
+          value: "1"
+        image: galacticfog/gestalt-security:release-2.3.9
+        imagePullPolicy: Always
+        name: gestalt-security
+        ports:
+        - containerPort: 9000
+          name: service-api
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /etc/ssl/certs/java/cacerts
+          name: cacerts
+          subPath: cacerts
+        - mountPath: /opt/docker/conf/logback.xml
+          name: logback-conf
+          subPath: gestalt-security-logback-config.xml
+      imagePullSecrets:
+      - name: imagepullsecret-1
+      - name: imagepullsecret-2
+      - name: imagepullsecret-3
+      - name: imagepullsecret-4
+      - name: imagepullsecret-5
+      restartPolicy: Always
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: gestalt-security-cacerts
+          optional: true
+        name: cacerts
+      - configMap:
+          defaultMode: 420
+          name: gestalt-security-logback-config
+        name: logback-conf

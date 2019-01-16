@@ -1,0 +1,5 @@
+name: 'root-directory-account-store'
+description: 'mapping between root org and ldap.example.com role.galacticfog group'
+storeType: DIRECTORY
+isDefaultAccountStore: false
+isDefaultGroupStore: false

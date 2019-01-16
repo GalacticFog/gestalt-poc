@@ -1,0 +1,64 @@
+<configuration>
+
+  <conversionRule conversionWord="coloredLevel" converterClass="play.api.libs.logback.ColoredLevel" />
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} |%-5level| %logger{15}: %message%n%xException</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="ACCESS" class="ch.qos.logback.core.FileAppender">
+    <file>${ACCESS_LOG:-./logs/access.log}</file>
+    <encoder>
+      <pattern>%date %message%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="AUDIT" class="ch.qos.logback.core.FileAppender">
+    <file>${AUDIT_LOG:-./logs/audit.log}</file>
+    <encoder>
+      <pattern>%message%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="ASYNCSTDOUT" class="ch.qos.logback.classic.AsyncAppender">
+    <appender-ref ref="STDOUT" />
+  </appender>
+
+  <appender name="ASYNCACCESS" class="ch.qos.logback.classic.AsyncAppender">
+    <appender-ref ref="ACCESS" />
+  </appender>
+
+  <appender name="ASYNCAUDIT" class="ch.qos.logback.classic.AsyncAppender">
+    <appender-ref ref="AUDIT" />
+  </appender>
+
+  <!--
+    The logger name is typically the Java/Scala package name.
+    This configures the log level to log at for a package and its children packages.
+  -->
+
+  <logger name="akka" level="INFO" />
+  <logger name="play" level="INFO" />
+  <logger name="javax" level="INFO"/>
+
+  <logger name="application"  level="INFO" />
+  <logger name="com.galacticfog" level="DEBUG"/>
+  <logger name="controllers" level="DEBUG"/>
+
+  <logger name="scalikejdbc" level="INFO"/>
+
+  <logger name="access" additivity="false" level="INFO">
+    <appender-ref ref="ASYNCACCESS" />
+  </logger>
+
+  <logger name="audit" additivity="false" level="INFO">
+    <appender-ref ref="ASYNCAUDIT" />
+  </logger>
+
+  <root level="DEBUG">
+    <appender-ref ref="ASYNCSTDOUT" />
+  </root>
+
+</configuration>

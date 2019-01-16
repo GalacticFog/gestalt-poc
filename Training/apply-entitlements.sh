@@ -10,7 +10,7 @@ time for user in `cat ../../all-users.txt`; do
     time fog admin apply-entitlements --user $user -f ../entitlements/readonly-org.yaml /training
 
     # User
-    # fog admin apply-entitlements --user $user -f ../entitlements/readonly-workspace.yaml /training/${user,,}
+    time fog admin apply-entitlements --user $user -f ../entitlements/readonly-workspace.yaml /training/${user,,}
     time fog admin apply-entitlements --user $user -f ../entitlements/developer-dev-environment.yaml /training/${user,,}/local
 
 done

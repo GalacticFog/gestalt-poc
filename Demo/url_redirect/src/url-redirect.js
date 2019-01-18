@@ -29,7 +29,7 @@ module.exports.handler = async (event, context, callback) => {
         const key = context.headers.Host;
 
         if (key) {
-            const targetLocation = map[key];
+            const targetLocation = map[key] || process.env.DEFAULT_TARGET;
 
             if (targetLocation) {
                 // Send a redirect
@@ -41,12 +41,6 @@ module.exports.handler = async (event, context, callback) => {
                     body: ''
                 });
             }
-
-            return callback(null, {
-                statusCode: 404,
-                headers: {},
-                body: `No location found for id ${key}`
-            });
         }
 
         return callback(null, {

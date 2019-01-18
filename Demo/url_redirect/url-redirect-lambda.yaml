@@ -20,8 +20,11 @@ properties:
   handler: handler
   runtime: nodejs
   env:
-    HOST_0: 'localhost'
-    HOST_0_TARGET: 'http://127.0.0.1:31112'
-    HOST_1: '127.0.0.1'
-    HOST_1_TARGET: 'http://galacticfog.com'
+    DEFAULT_TARGET: 'http://galacticfog.com'
+    # HOST_0: 'localhost'
+    # HOST_0_TARGET: 'http://127.0.0.1:31112'
+    # HOST_1: '127.0.0.1'
+    # HOST_1_TARGET: 'http://galacticfog.com'
   memory: 128
+
+

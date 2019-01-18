@@ -1,17 +1,32 @@
-const map = {
-    'gf': 'http://galacticfog.com',
-    'test2': 'https://test.galacticfog.com'
+
+function loadConfig() {
+    const map = {};
+    for (let i = 0; ; i++) {
+        const key1 = `HOST_${i}`;
+        const key2 = `HOST_${i}_TARGET`;
+        const value1 = process.env[key1];
+        const value2 = process.env[key2];
+        if (value1 && value2) {
+            map[value1] = value2;
+        } else {
+            // No more
+            break;
+        }
+    }
+    return map;
 }
 
 module.exports.handler = async (event, context, callback) => {
     console.log(`context: ${context}`);
     console.log(`event: ${event}`);
 
+    const map = loadConfig();
+
     event = (event && event.length > 0) ? JSON.parse(event) : {};
     context = (context && context.length > 0) ? JSON.parse(context) : {};
 
     if (context.method == 'GET') {
-        const key = getParam(context, 'id');
+        const key = context.headers.Host;
 
         if (key) {
             const targetLocation = map[key];

@@ -34,7 +34,7 @@ async function doPost(event) {
 
     console.log(`event: ${JSON.stringify(event)}`);
 
-    const token = process.env.TOKEN;
+    const token = process.env.TOKEN_SECRET;
     const url = process.env.DOWNSTREAM_URL;
     const job = process.env.JOB;
     const method = process.env.DOWNSTREAM_HTTP_METHOD || 'POST'

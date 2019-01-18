@@ -24,7 +24,7 @@ properties:
     DOWNSTREAM_URL: 'http://myjenkinsserver:8080/RunBuild'
     JOB: 'job'
     CLOUD_OPTIONS: 'AWS,Azure,Google'
-    TOKEN: DummyToken
+    TOKEN_SECRET: DummyToken
     # LOGO_IMAGE
     
   memory: 128

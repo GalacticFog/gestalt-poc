@@ -50,15 +50,20 @@ async function doPost(event) {
 
     try {
         const summary = await invokeUrl(url, method, body);
-        return success(JSON.stringify({
-            requestId,
-            request: {
-                url,
-                method,
-                body
-            },
-            summary
-        }, null, 2));
+        
+        // const message = JSON.stringify({
+        //     requestId,
+        //     request: {
+        //         url,
+        //         method,
+        //         body
+        //     },
+        //     summary
+        // }, null, 2);
+
+        const message = `Success - Request ID '${requestId}' submitted successfully.`;
+
+        return success(message);
     } catch (err) {
         return error(JSON.stringify({
             requestId,
@@ -278,6 +283,33 @@ function errorHtml(msg) {
 }
 
 function successHtml(msg) {
+    return `
+<html>
+<head>
+    <title>Success</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body class="bg-light">
+    <div class="container">
+        <div class="row" style="margin:100px;">
+            <div>
+            ${getLogoHtml()}
+            </div>
+            <div>
+                <pre>
+                    ${msg}
+                </pre>
+            </div>
+            <a href="javascript:history.back()">Go Back</a>
+        </div>
+    </div>
+</body>
+</html>   
+`
+}
+
+function successHtml_withResponseDetails(msg) {
     return `
 <html>
 <head>

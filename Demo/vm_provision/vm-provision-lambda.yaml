@@ -25,6 +25,7 @@ properties:
     JOB: 'job'
     CLOUD_OPTIONS: 'AWS,Azure,Google'
     TOKEN_SECRET: DummyToken
+    LASER_PROVIDER: '#{Config laser_provider}'
     # LOGO_IMAGE
     
   memory: 128
